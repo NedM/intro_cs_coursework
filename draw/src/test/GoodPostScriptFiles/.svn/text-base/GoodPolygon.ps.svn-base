@@ -1,0 +1,41 @@
+gsave
+1.5 setlinewidth
+newpath
+270.0 534.2807059869776 moveto
+60.0 0.0 rlineto
+51.0 rotate
+60.0 0.0 rlineto
+51.0 rotate
+60.0 0.0 rlineto
+51.0 rotate
+60.0 0.0 rlineto
+51.0 rotate
+60.0 0.0 rlineto
+51.0 rotate
+60.0 0.0 rlineto
+51.0 rotate
+60.0 0.0 rlineto
+51.0 rotate
+closepath
+stroke
+grestore
+
+gsave
+1.5 setlinewidth
+newpath
+240.0 507.6694938847424 moveto
+120.0 0.0 rlineto
+72.0 rotate
+120.0 0.0 rlineto
+72.0 rotate
+120.0 0.0 rlineto
+72.0 rotate
+120.0 0.0 rlineto
+72.0 rotate
+120.0 0.0 rlineto
+72.0 rotate
+closepath
+stroke
+grestore
+
+

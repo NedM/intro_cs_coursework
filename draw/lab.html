@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang=en lang=en>
+<HEAD>
+	<meta http-equiv=content-type content="text/html; charset=utf-8" />
+	<link rel=stylesheet href="main.css" type="text/css" />
+<title>Lab 1: PostScript</title>
+</HEAD>
+<BODY>
+
+<h1>Lab 1: PostScript</h1>
+<div style="font-weight: bold">6.005 Elements of Software Construction
+<br />Spring 2011
+<br />Due: Friday, February 25</div>
+
+<p>In this lab, you will learn about using Subversion for collaborative development and you will get a quick introduction to the PostScript language,
+which you will be using in your project.
+
+<h2>Before Lab</h2>
+
+<p>Before coming to lab, please do the following:</p>
+<ul>
+<li>Read both <a href="assignment.html">Project 1</a> and this lab handout.
+</li>
+<li>
+Read through the sections of the <a
+href="http://www.tailrecursive.org/postscript/postscript.html">guide
+to PostScript</a> listed below.
+</li>Install Ghostscript and Ghostview if you don't already have them. Ghostscript
+is a "PostScript previewer" -- an interpreter for programs written in PostScript. 
+There are many interpreters available on a variety of
+platforms.  Here are the recommended ones:
+<ul>
+<li><b>Windows</b>: install <a href="ftp://ctan.tug.org/tex-archive/support/ghostscript/AFPL/gs854/gs854w32.exe">Ghostscript 8.54</a>
+and <a href="ftp://ctan.tug.org/tex-archive/support/ghostscript/ghostgum/gsv48w32.exe">GhostView 4.8</a>.
+<li><b>MacOS</b>: the Preview application acts as a PostScript viewer
+(by first translating from PostScript to PDF), but it does not report PostScript errors, 
+so you will probably want to install Ghostscript.  One version that's easy to install is <a href="http://prdownloads.sourceforge.net/gimp-print/espgs-7.07.1.ppc.dmg?download">EPS Ghostscript</a>.
+<li><b>Athena</b>: already installed.
+<li><b>Linux</b>: find the ghostscript package for your Linux distribution and install it, if you don't already
+have it.
+</ul>
+</li> 
+</ul>
+
+
+<h2>Collaborative Development with Subversion</h2>
+
+<p>
+The following exercises were in the last lab, but very few people got
+to them. These exercises should familiarize you with several important
+aspects of collaborative, multi-person development using a version
+control system such as Subversion.
+</p>
+
+<h3>Who, What, Where, When, and Why</h3>
+
+<p>
+In addition to storing your source code files and the changes made to
+them, Subversion stores information about who changed what, when, in
+which files&mdash;and if the person doing the changing was playing
+nice and writing good commit log messages, it can even tell you why
+the changes were made.
+</p>
+
+<p>
+In the Package Explorer of Eclipse, browse to one of the files you
+modified and committed during today's lab, or during the previous
+lab. Right-click the file, and select &quot;<b>Team &rarr; Show
+History</b>.&quot; A new view will appear (at the bottom of the
+Eclipse window, if you don't drag it somewhere else). That view will
+list all the revisions committed to the repository that affected the
+selected file.
+</p>
+
+<p>
+Clicking on a particular revision will show you both the files that
+were added (&quot;A&quot;), modified (&quot;M&quot;), or deleted
+(&quot;D&quot;) by that commit, as well as the commit comment written
+by the committer. Whenever you use version control to collaborate,
+write commit comments!
+</p>
+
+<h3>Shared Repositories</h3>
+
+<p>
+Speaking of using version control to collaborate... let's check out an
+assignment that, unlike your other assignments, is accessible to the
+entire class.  Go to the SVN Repository Exploring perspective, and
+navigate to the folder:
+</p>
+<pre>everyone/collab_svn</pre>
+<p>Right click on this folder and choose &quot;Checkout...&quot;.
+Accept the default name and finish checking out the project into your
+workspace.
+</p>
+
+<p>
+Once you've checked out the project, return to the Java perspective
+and <b>run the <tt>Main</tt> class</b> in package <tt>collab</tt> (for
+example, by right-clicking and selecting &quot;Run As... &rarr; Java
+Application&quot;).
+</p>
+
+<p>
+The <tt>Main</tt> class <tt>main</tt> method looks for all the Java
+classes in the <tt>collab</tt> package, creates a new instance of each
+one, and calls the method <tt>toString()</tt> on each instance.
+</p>
+
+<p>
+Some of your classmates may already have added their own classes to
+the <tt>collab</tt> package, but there should be at least one other
+class from one of the teaching assistants (in this
+case: <tt>Telmo.java</tt>). Using the teaching assistant class as a
+template, <b>create a new class</b> in the <tt>collab</tt> package
+that is named with your Athena username (but follows the Java
+convention of CamelCaseCapitals for class names). One way to do this
+is to right-click &quot;collab&quot; and choose &quot;Add &rarr;
+Class.&quot; Have the <tt>toString()</tt> method of this
+class <tt>return</tt> a <tt>String</tt> of your choosing. You should
+be able to run the <tt>Main</tt> class again and see your message in
+the list.
+</p>
+
+<h3>Updating</h3>
+
+<p>
+Right-click on the &quot;collab_svn&quot; project and choose &quot;Team &rarr; Update.&quot; Alternatively, select the &quot;Team &rarr; Synchronize with Repository&quot; option to use the synchronization screen seen in the last lab, where you can see updates before they happen. Right-click and choose &quot;Update&quot; to update files or directories.
+</p>
+
+<p>
+<b>Updating</b> gives you the latest version of something (a file, or
+a directory or directory tree full of files) from the
+repository. Relevant reading from the SVN documentation includes the
+sections
+on <a href="http://svnbook.red-bean.com/en/1.4/svn.basic.in-action.html#svn.basic.in-action.track-repos">How
+Working Copies Track the Repository &amp; Mixed Revision Working
+Copies</a>.
+</p>
+
+<h3>Committing</h3>
+
+<p>
+Before continuing, <b>make sure you can run the <tt>Main</tt> class
+successfully</b> and see everyone's messages, because you are about to
+check in. As mentioned in the previous lab, checking in broken code
+will surely earn you the ire of other students who, should they update
+and receive your nonfunctional changes, will be unable to continue
+working.
+</p>
+
+<p>
+<b>Check in your work</b>. Since you have created a new file, you need
+to add it to version control.  <b>Eclipse does not automatically put
+new files into Subversion</b>; you have to tell it that you want to
+commit each new file.  (Once you do that, all future changes you make
+to that file will be committed.)  One way to add a new file to
+subversion is to right-click on it and select &quot;Team &rarr; Add to
+Version Control&quot;. You also have a chance to add files using the
+list of checkboxes in the commit dialog itself.
+</pq>
+
+<p>
+When you try to check in, your attempt may fail with an error from
+Subclipse because your working copy is out of date. That means
+somebody else in the class committed since the last time you updated,
+so Subversion doesn't know what to do with the differences.  Update
+your working copy, and try the commit again.
+</p>
+
+<h3>All is Well</h3>
+
+<p>
+<b>Find a partner,</b> and make sure both you and your partner have
+received each other's code by committing and updating; you should both
+be able to run the <tt>Main</tt> class and see your partner's message
+in the console.
+</p>
+
+<h3>Merging</h3>
+
+<p>
+With the help of your partner, you will now simulate a situation where
+the use of Subversion becomes more complex. Make sure both you and
+your partner have updated versions of the shared project. <b>Pick one
+of the Java files added by either you or your parter</b>. You will
+both edit this same file, but you will do it on different
+machines. One of you (say, Alice) should add a comment line near the
+top of Alice's copy of the file, right after the line
+&quot;<tt>package collab;</tt>&quot; The other person (Bob) should add
+a comment line at the end of Bob's copy of the file file. Be sure each
+person makes no other changes.
+</p>
+
+<p>
+Pick one of you to commit first (say, Alice), and <b>commit</b>. Once
+Alice commits, Bob will <b>update</b>. Even though Bob has modified
+the same file Alice committed, because the changes were in different
+parts of the file, Subversion will merge the changes
+automatically. Now Bob can <b>commit</b>, and Alice
+should <b>update</b>. Once this process is done, both you and your
+partner should have identical source files with both of the extra
+comments.
+</p>
+
+<h3>Conflicts</h3>
+
+<p>
+While SVN does a good job of merging unrelated changes to the same
+source file, it is not magic.
+</p>
+
+<p>
+In the same file you've been editing with your partner, both you and
+your partner should <b>modify the <tt>String</tt> returned
+by <tt>toString()</tt> to have <i>different</i> values</b>.
+</p>
+
+<p>
+Pick one person to commit first. Once the change is committed, the
+other person should update, and you should both take a look at the
+result, which should contain a <b>conflict</b>.
+</p>
+
+<p>
+First, notice that a blue-ish square-ish icon has been added to the
+conflicted file in the Package Explorer. This indicates that the file
+contains a conflict that Subversion should not merge
+automatically. Until you inform Subversion that the conflict has been
+manually resolved, removing that conflict icon, it will refuse to
+allow you to commit the file.
+</p>
+
+<p>
+Second, several extra files have appeared, with the different bits of
+code Subversion couldn't fit together. (The SVN documentation
+on <a href="http://svnbook.red-bean.com/en/1.4/svn.tour.cycle.html#svn.tour.cycle.resolve">Resolve
+Conflicts (Merging Others' Changes)</a> explains what these files
+are.)
+</p>
+
+<p>
+To merge the conflict manually, right-click on the file and pick
+&quot;<b>Team &rarr; Edit Conflicts</b>,&quot; which brings up a
+two-paned editor. On the left hand is your (local) code, and on the
+right is your partner's (committed) code.
+</p>
+
+<p>
+Edit the left side to your mutual, conflict-resolving satisfaction,
+and save. Then do &quot;<b>Team &rarr; Mark Resolved</b>.&quot; The
+extra files will be deleted, and the conflict icon will
+disappear. Check that the resolved version runs fine&mdash;don't break
+the build!&mdash;and commit it.
+</p>
+
+<h3>Fall Back!</h3>
+
+<p>
+One final note: the &quot;Replace With&quot; menu may come in handy if
+you realize you need to fall back to a previous version of your
+work. Just remember to commit <b>working code</b> with <b>good commit
+comments</b>, and it should always be easy to restore order to any
+mess you find yourself in.
+</p>
+
+<div class="boxed">
+<img src="check.gif" width="16" height="16"/><b>Checkpoint.</b>  Find
+a TA or another member of the course staff and review your work on
+collaborative development.
+</div>
+
+<br clear="both" />
+
+
+
+<h2>The Lab</h2>
+
+<h3>Running your first PostScript programs</h3>
+
+<p>
+<i>Ghostscript</i> is an interpreter, which gives you a prompt and lets you type Postscript 
+code interactively and see its results.  <i>Ghostview</i> is
+file viewer, which runs a Postscript file and displays the resulting picture.
+
+<p>
+Start Ghostscript (on Athena/Linux/Mac, run the command <tt>gs</tt>).  You should see a prompt.  Type the following Postscript code:
+<pre>
+2 3 add pstack
+</pre>
+
+<p>
+You should see it display 5.  (The <tt>pstack</tt> command prints the current contents of the stack, which is useful for debugging.)
+
+<p>
+Now create a file called <tt>square.ps</tt> with the following contents, and open it in Ghostview (<tt>gv</tt> on Athena and Linux, 
+Preview on Mac):</p>
+
+<div class="code"><pre>
+newpath
+1.5 setlinewidth
+72 72 moveto
+72 0 rlineto
+0 72 rlineto
+-72 0 rlineto
+closepath
+stroke
+showpage
+</div></pre>
+
+<p>This program creates a 1-inch square located 1 inch above and 1 inch
+to the right of the page's bottom left corner. (PostScript uses typographic units: 1 inch
+is 72 "points").
+
+<h3>Working through a PostScript tutorial</h3>
+
+<p>Work through this <a
+href="http://www.tailrecursive.org/postscript/postscript.html">guide
+to PostScript</a>, focusing on the following sections:
+    <ul>
+      <li><a href="http://www.tailrecursive.org/postscript/what-is-it.html">What <i>is</i> PostScript?</a></li>
+      <li><a href="http://www.tailrecursive.org/postscript/graphics.html">Graphics Concepts in PostScript</a></li>
+      <li><a href="http://www.tailrecursive.org/postscript/language.html">Language Concepts in PostScript</a></li>
+      <li><a href="http://www.tailrecursive.org/postscript/programming.html">Programming in PostScript</a></li>
+      <li><a href="http://www.tailrecursive.org/postscript/drawing.html">Drawing and Filling Shapes</a> </li>      
+      <li><a href="http://www.tailrecursive.org/postscript/transforms.html">Transformations</a></li>
+    </ul>
+
+<p>The first five sections are contiguous, so you can go from
+one to the other by starting at the first and just clicking "next page".
+
+<p>Do the following exercises:
+    <ul>
+      <li>Modify <a href="http://www.tailrecursive.org/postscript/examples/box1.html">the square drawing program
+      </a> so that one side of the square is left open (that is, without a visible stroke).
+      </li>
+      <li>Modify <a href="http://www.tailrecursive.org/postscript/examples/rotate.html">the program that
+      draws a line at different rotations</a> so that the line being drawn gets longer as the rotation
+      progresses.
+      </li>
+      <li>Modify <a href="http://www.tailrecursive.org/postscript/examples/translate.html">the program that
+      draws a box using translation</a> so that it draws a 3 by 3 array of boxes.
+      </li>
+      <li>Modify <a href="http://www.tailrecursive.org/postscript/examples/shadewidth.html">the program that
+      draws two boxes and two lines</a> so that the boxes appear to have roughly the same size. Then modify it
+      again so that the last box is drawn several times at different rotations.
+      </li>
+    </ul>
+
+<h3>Creating your own PostScript program</h3>
+
+Write a PostScript program that draws a rough representation of MIT's dome (as shown, for example, 
+<a href="http://linc.mit.edu/images/154/the_dome.jpg">here</a>). Your program should at least draw some columns
+and a semicircle for the dome itself. We suggest that you sketch your design on paper first, 
+marking your intended dimensions. To draw a circle, you will need to use the arc command, described in the
+tutorial 
+<a href="http://www.tailrecursive.org/postscript/operators.html#arc">here</a>.
+
+</ol>
+
+<div class="boxed">
+<b>Checkoff.</b> Find a TA or another member of the course staff and
+demonstrate your PostScript creations to be checked off on this lab.
+</div>
+
+
+</body>
+</html>
+
+<!--
+<div class="code"><pre>
+</div></pre>
+-->

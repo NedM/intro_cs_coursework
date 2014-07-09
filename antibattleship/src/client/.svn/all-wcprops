@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/6.005/sp11/!svn/ver/20858/groups/antibattleship/jven-nedmurp-jboortz/src/client
+END
+BoardMarkingEnum.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/6.005/sp11/!svn/ver/16647/groups/antibattleship/jven-nedmurp-jboortz/src/client/BoardMarkingEnum.java
+END
+ABSShip.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/client/ABSShip.java
+END
+ABSAttackBoard.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/client/ABSAttackBoard.java
+END
+ABSMarkBoard.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/client/ABSMarkBoard.java
+END
+ABSGame.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/6.005/sp11/!svn/ver/20858/groups/antibattleship/jven-nedmurp-jboortz/src/client/ABSGame.java
+END
+ABSBoard.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/6.005/sp11/!svn/ver/20037/groups/antibattleship/jven-nedmurp-jboortz/src/client/ABSBoard.java
+END
+ABSBoardHash.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/6.005/sp11/!svn/ver/20858/groups/antibattleship/jven-nedmurp-jboortz/src/client/ABSBoardHash.java
+END
+ABSBoardSquare.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/6.005/sp11/!svn/ver/16388/groups/antibattleship/jven-nedmurp-jboortz/src/client/ABSBoardSquare.java
+END

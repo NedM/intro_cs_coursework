@@ -1,0 +1,9 @@
+Usability:
+
+We designed our GUI with the assumption that the user knows how to play Anti-battleship in general, but has never played our particular version before.  The GUI guides the user through each part of the game with four main screens containing a combination of directions and labeled buttons to allow the user to take appropriate action.  Popup and wait screens are utilized to notify the user of various other aspects of the game and to allow the user to make yes/no choices.  The sketches of the four main screens in the order that the user will encounter them are provided in UIPage1 and UIPage 2 in the deliverables folder.
+
+In addition to designing a self-explanatory GUI, we designed the system so that the user could not easily break it by attempting something illegal.  For instance, if a user enters invalid board specs or tries to create a ship of non-integer length, a popup screen notifies him of the problem and allows him to fix it.  Under no circumstances should the game crash because of something the user enters. 
+
+Additionally, we utilize popup screens to allow the user to accept or reject the game specs of another user.  To ensure that a user always knows when she must wait for the other player to take an action, we will implement wait screens that notify the user that the game is waiting for an action from the other player.  Therefore, the user will never think that the program has hung up when it is supposed to be waiting.
+
+All of these features are designed to provide the user with a positive gaming experience that enables him to focus on his strategy.

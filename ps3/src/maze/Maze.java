@@ -1,0 +1,142 @@
+package maze;
+
+import java.util.ArrayList;
+import java.util.List;
+import static maze.Direction.*;
+
+public class Maze 
+{
+	protected List<Room> rooms;
+	private Room exit;
+
+	public Room getRoom(int x, int y) 
+	{
+		for (Room r : rooms)
+			if (r.getX() == x && r.getY() == y)
+				return r;
+		return null;
+	}
+	
+	public Room getRoom(Room rm)
+	{
+		return getRoom(rm.getX(), rm.getY());
+	}
+
+	protected Room createRoom(int x, int y) 
+	{
+		return new Room(x, y);
+	}
+	
+	protected void setExit(Room r) 
+	{
+		exit = r;
+	}
+	
+	public Room getExit() 
+	{
+		return exit;
+	}
+
+	public Room dig(Room room, Direction dir) 
+	{
+		int newRoomX, newRoomY;
+		Direction oppositeDir;
+		Room newRoom;
+		
+		switch(dir)
+		{
+		case NORTH:
+			newRoomX = room.getX();
+			newRoomY = room.getY() + 1;
+			oppositeDir = Direction.SOUTH;
+			break;
+		case EAST:
+			newRoomX = room.getX() + 1;
+			newRoomY = room.getY();
+			oppositeDir = Direction.WEST;
+			break;
+		case SOUTH:
+			newRoomX = room.getX();
+			newRoomY = room.getY() - 1;
+			oppositeDir = Direction.NORTH;
+			break;
+		case WEST:
+			newRoomX = room.getX() - 1;
+			newRoomY = room.getY();
+			oppositeDir = Direction.EAST;
+			break;
+		default:
+			throw new RuntimeException("ERROR: Unrecognized direction!");
+		}
+		
+		//Call createRoom factory method
+		newRoom = this.createRoom(newRoomX, newRoomY);
+			
+		if(null == this.getRoom(newRoom))
+		{
+			//If the new room is not in the list of rooms, add it
+			this.rooms.add(newRoom);			
+		}
+				
+		//Knock down the appropriate walls.
+		this.getRoom(room).removeWall(dir);
+		this.getRoom(newRoom).removeWall(oppositeDir);
+		
+		return newRoom;
+	}
+
+	public Maze()
+	{
+		rooms = new ArrayList<Room>(); 
+		rooms.add(exit=createRoom(0,0));
+	}
+	
+	/************************************************
+	 * Test Cases For You
+	 ************************************************/
+	public void makeExample() {
+		Room r = getRoom(0,0);
+		r = dig(dig(dig(r,NORTH),NORTH),EAST);
+		dig(r,SOUTH);
+		r = dig(dig(dig(r,EAST),SOUTH),SOUTH);
+		setExit(r);
+		dig(dig(r,WEST),WEST);
+	}
+	public void makeExample2() {
+		int[][]x={{0xc,0x5,0x7,0xd,0x5,0x6,},
+				{0xa,0xc,0x4,0x4,0x6,0xa,},
+				{0x8,0x0,0x0,0x0,0x0,0x2,},
+				{0xa,0x9,0x1,0x1,0x3,0xa,},
+				{0x9,0x5,0x7,0xd,0x5,0x3,}};
+		makeExample(x,3,2);
+	}
+	public void makeExample3() {
+		int[][]x ={{0xe,0xc,0x5,0x6,0xc,0x6,0xd,0x6,0xf,0xc,0x4,0x6,},
+			{0x8,0x2,0xe,0x8,0x1,0x1,0x4,0x2,0xc,0x0,0x1,0x3,},
+			{0x8,0x0,0x0,0x1,0x4,0x4,0x3,0x8,0x0,0x2,0xf,0xf,},
+			{0xa,0xa,0x8,0x7,0x9,0x2,0xf,0x8,0x3,0x8,0x5,0x6,},
+			{0xb,0x8,0x1,0x4,0x4,0x2,0xd,0x0,0x5,0x0,0x5,0x2,},
+			{0xc,0x3,0xe,0xb,0xa,0x8,0x4,0x2,0xe,0x9,0x4,0x2,},
+			{0xa,0xc,0x3,0xe,0xa,0x8,0x0,0x0,0x0,0x6,0x8,0x2,},
+			{0x8,0x0,0x4,0x2,0x8,0x1,0x0,0x0,0x1,0x2,0x9,0x2,},
+			{0x8,0x0,0x2,0x8,0x3,0xc,0x2,0x9,0x6,0x9,0x7,0xa,},
+			{0x9,0x1,0x0,0x3,0xc,0x0,0x0,0x5,0x0,0x4,0x5,0x2,},
+			{0xd,0x6,0x8,0x4,0x2,0x9,0x0,0x5,0x0,0x0,0x4,0x3,},
+			{0xd,0x1,0x1,0x3,0x9,0x7,0xb,0xd,0x3,0xb,0x9,0x7,},};
+		makeExample(x,5,6);
+	}
+	public void makeExample(int[][] x, int outx, int outy) {
+		for (int i=0;i<x.length;++i) {
+			for (int j=0;j<x[i].length;++j) {
+				Room r = j>0||i>0?createRoom(j,i):getRoom(0,0);
+				if(r!=getRoom(0,0))rooms.add(r);
+				if(1!=(x[i][j]&1))r.removeWall(NORTH);
+				if(2!=(x[i][j]&2))r.removeWall(EAST);
+				if(4!=(x[i][j]&4))r.removeWall(SOUTH);
+				if(8!=(x[i][j]&8))r.removeWall(WEST);
+			}
+		}
+		setExit(getRoom(outx,outy));
+	}
+}
+

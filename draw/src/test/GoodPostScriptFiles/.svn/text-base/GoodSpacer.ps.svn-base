@@ -1,0 +1,21 @@
+gsave
+1.5 setlinewidth
+newpath
+15.0 5.0 moveto
+10.0 0.0 rlineto
+0.0 10.0 rlineto
+-10.0 0.0 rlineto
+0.0 -10.0 rlineto
+closepath
+grestore
+gsave
+1.5 setlinewidth
+newpath
+95.0 95.0 moveto
+10.0 0.0 rlineto
+0.0 10.0 rlineto
+-10.0 0.0 rlineto
+0.0 -10.0 rlineto
+closepath
+grestore
+

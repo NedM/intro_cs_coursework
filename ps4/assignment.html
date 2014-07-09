@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="main.css" type="text/css">
+	<link href="prettify.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="prettify.js"></script>
+<title>Problem Set 4: Generics, The Object Contract, and Concurrency</title>
+</head><body onload="prettyPrint()"">
+
+<table>
+<tbody><tr valign="bottom">
+<td>
+<h1>6.005 Elements of Software Construction | Spring 2011<br>
+Problem Set 4: Generics, The Object Contract, and Concurrency <br>
+Due: Monday, April 11, 2011 at 11:59pm
+</h1>
+</td>
+</tr>
+</tbody></table>
+<p>
+Please fill in the answers to the following problems in the supplied <tt>answers.txt</tt> file. The answers you submit will be dumped into a spreadsheet, so ensure that you fill your answers in the provided spaces.</p>
+
+<p>As long as you write your answers in the provided spaces everything should be fine, but if you are paranoid, you can run the provided <tt>validate.py</tt> on your <tt>answers.txt</tt> file to ensure that your answers are correctly placed. This can be done by calling <tt>python validate.py path/to/answers.txt</tt> on any *nix system. This is <b>not</b> mandatory to complete the assignment.
+</p>
+<h2>Generics</h2>
+<p>
+<b>Problem 1.</b> Let <code class="prettyprint">listShape</code>, <code class="prettyprint">listObject</code>, and <code class="prettyprint">listWildcard</code> be variables of types <code class="prettyprint">List&lt;Shape&gt;</code>, <code class="prettyprint">List&lt;Object&gt;</code>, and <code class="prettyprint">List&lt;?&gt;</code>, respectively.
+</p>
+<p>
+<b>A. [18 points]</b> Assume that <code class="prettyprint">java.util.*</code> has been imported. Will the following statements produce warnings, or not compile? Why, or why not?
+</p>
+
+<table>
+<tr><td>
+i.
+</td><td>
+<pre class="prettyprint">listShape.add(new Object());</pre>
+</td></tr>
+<tr><td>
+ii.
+</td><td>
+<pre class="prettyprint">listObject.add(listShape);</pre>
+</td></tr>
+<tr><td>
+iii.
+</td><td>
+<pre class="prettyprint">listWildcard.add(new Object());</pre>
+</td></tr>
+<tr><td>
+iv.
+</td><td>
+<pre class="prettyprint">listWildcard.addAll(listObject);</pre>
+</td></tr>
+<tr><td>
+v.
+</td><td>
+<pre class="prettyprint">listObject.addAll(listWildcard);</pre>
+</td></tr>
+<tr><td>
+vi.
+</td><td>
+<pre class="prettyprint">listObject.add(listWildcard.get(0));</pre>
+</td></tr>
+<tr><td>
+vii.
+</td><td>
+<pre class="prettyprint">listShape = listObject;</pre>
+</td></tr>
+<tr><td>
+viii.
+</td><td>
+<pre class="prettyprint">listObject = listShape;</pre>
+</td></tr>
+<tr><td>
+ix.
+</td><td>
+<pre class="prettyprint">listWildcard = listShape;</pre>
+</td></tr>
+<tr><td>
+</table>
+
+<p>
+<b> B. [5 points] </b> If <code class="prettyprint">listShape</code>
+ and <code class="prettyprint">listObject</code> are both empty, what
+ is the value returned
+ by <code class="prettyprint">listShape.equals(listObject)</code>?
+ Why?
+</p>
+
+<b>Problem 2. </b> Consider the following interface:
+
+<blockquote>
+<pre class="prettyprint">public interface Receiver&lt;M, V&gt; {
+    V receive(M message);
+}
+</pre>
+</blockquote>
+
+<p>
+<b> A. [5 points]</b> Write a generic method that takes a parameter <code
+class="prettyprint">Receiver r</code>, and returns a new <code
+class="prettyprint">Receiver</code>. The returned receiver should have the same
+type as <code class="prettyprint">r</code>, and when <code
+class="prettyprint">receive</code> is called, it should call <code
+class="prettyprint">r.receive</code> and return the resulting value.  Your
+method should return a <code class="prettyprint">Receiver&lt;M, V&gt;</code> for
+any types <code class="prettyprint">M</code>, <code class="prettyprint">V</code>
+when this construction is valid, without using type casts, producing warnings,
+or suppressing warnings.
+</p>
+
+<p>
+<b> B. [10 points]</b> Write a generic method that retuns a
+<code class="prettyprint">Receiver</code> that is the composition of
+two other receivers; that is, it passes its message onto the first
+receiver, the return value of the first receiver onto the second
+receiver, and returns the second return value. Make the generic types
+as general as possible, with no type casts, warnings, or suppressed
+warnings.
+</p>
+
+<h2>The Object Contract</h2>
+<p>
+
+<b>Problem 3.</b> This problem focuses on
+the <code class="prettyprint">equals</code>
+and <code class="prettyprint">hashCode</code> methods specified by
+the <code class="prettyprint">Object</code> class in Java.
+</p>
+
+<p>
+<b> A. [5 points]</b> Consider the following immutable class:
+
+<blockquote>
+<pre class="prettyprint">public class Customer {
+     private final String name;
+     private final String address;
+
+     public Customer (String name, String address) {
+	     this.name = name;
+	     this.address = address;
+     }
+     /* getter methods for name and address */
+}
+</pre>
+</blockquote>
+</p>
+
+<p>
+There is no <code class="prettyprint">equals</code> method defined in
+this class, so it inherits the default behavior of
+the <code class="prettyprint">equals</code> methods from
+Java&#39;s <code class="prettyprint">Object</code> class.
+
+Explain what the <code class="prettyprint">equals</code> method in
+this class does. Give a simple example to illustrate why we might want
+to override the <code class="prettyprint">equals</code> method for
+this class.
+</p>
+
+
+
+<p>
+<b> B. [21 points]</b> Ben makes some assertions about
+effective <code class="prettyprint">equals</code>
+and <code class="prettyprint">hashCode</code> methods in Java, which
+are listed below. For each of these assertions, explain whether Ben is
+right or wrong.
+</p>
+
+<p>Some of these statements may not have straightforward
+&ldquo;yes&rdquo; or &ldquo;no&rdquo; answers &mdash; we are looking
+for correct reasoning in each case, along with precise explanations of
+examples, counter&ndash;examples or any tradeoffs wherever applicable.
+</p>
+
+<ul>
+<li><p>i. All <code class="prettyprint">equals</code> methods should
+start with the following few lines:
+
+<blockquote>
+<pre class="prettyprint">
+@Override
+public boolean equals(Object o) {
+     if (o == this)
+          return true;
+     /* other stuff */
+}
+</pre>
+</blockquote>
+</li>
+
+<li><p>ii. All <code class="prettyprint">equals</code> methods must check
+for the case where <code class="prettyprint">o</code>
+is <code class="prettyprint">null</code> explicitly:
+
+<blockquote>
+<pre class="prettyprint">
+@Override
+public boolean equals(Object o) {
+     if (o == null)
+          return false;
+     /* other stuff */
+}
+</pre>
+</blockquote>
+</li>
+
+<li><p>iii. The following <code class="prettyprint">hashCode</code>
+definition is sufficient for correctness in Java:</li>
+
+<blockquote>
+<pre class="prettyprint">
+@Override
+public int hashCode() {
+     return 6005;
+}
+
+</pre>
+</blockquote>
+</li>
+
+<li>
+<p>iv. The integer result returned from an
+object&#39;s <code class="prettyprint">hashCode</code> method must
+always be the same throughout the life-span of the object.
+<br><b>Hint</b>: Consider mutable objects.</br>
+<p>
+</li>
+
+<li>
+<p>v. If two objects are equal according to
+the <code class="prettyprint">equals(Object)</code> method, then
+calling the <tt>hashCode</tt> method on either of them must produce the same
+integer result.
+<p>
+</li>
+
+<li>
+<p>
+vi. Suppose <code class="prettyprint">a</code> and <code
+class="prettyprint">b</code> are both instances of class <code
+class="prettyprint">ClassB</code>, which subclasses <code
+class="prettyprint">ClassA</code>. Suppose <code
+class="prettyprint">a.equals(b)</code> evaluates to true. It is always the case
+that <code class="prettyprint">a.equals((ClassA)b)</code> evaluates to true.
+<p>
+</li>
+
+<li>
+<p>
+vii. There is never a good reason to reorder comparisons of the internal
+fields when comparing two objects inside an <tt>equals</tt> method,
+assuming all fields are legal (i.e. not <tt>null</tt>).
+</li>
+
+</ul>
+
+<p>
+<b> C. [5 points]</b> Read the code snippet shown below:
+</p>
+<blockquote>
+<pre class="prettyprint">public class BrokenHash {
+      static class Counter {
+          int i;
+          void incr () {i++;}
+
+          @Override
+          public boolean equals (Object o) {
+               if (!(o instanceof Counter))
+                    return false;
+               Counter c = (Counter) o;
+               return c.i == i;
+          }
+
+          @Override
+          public int hashCode () {return i;}
+      }
+
+      public static void main (String[] args) {
+          Set&lt;Counter&gt; m = new HashSet&lt;Counter&gt;();
+          Counter c = new Counter();
+          m.add(c);
+          System.out.println ("m contains c: " + m.contains(c));
+          c.incr();
+          System.out.println ("m contains c: " + m.contains(c));
+      }
+}
+
+</pre>
+</blockquote>
+
+<p>
+Predict and explain the output from two print statements in the code. Why do you think Java chose this
+specific behavior?
+</p>
+
+<p>
+<b> D. [6 points]</b> The specification
+of <code class="prettyprint">java.util.Set</code> says that a set
+should not contain itself.  Write a code snippet that violates this
+and goes badly wrong. Explain what is happening carefully and
+succinctly.
+</p>
+
+<h2>Concurrency</h2>
+<p>
+
+<b>Problem 4. [25 points]</b> This problem focuses on
+concurrency, specifically the challenges of avoiding deadlock
+in a multi-threaded application. 
+</p>
+
+<p>
+Consider the following <code class="prettyprint">TreeNode</code> class:
+
+<p>
+
+The <code class="prettyprint">addChild</code> method adds the given
+<code class="prettyprint">TreeNode</code> to the current node's list of children, while the
+<code class="prettyprint">setParent</code> method sets the current node's
+parent field to the <code class="prettyprint">TreeNode</code> input. 
+
+</p>
+
+<blockquote>
+<pre class="prettyprint">public class TreeNode {
+   TreeNode parent   = null;
+   List&lt;TreeNode&gt; children = new ArrayList&lt;TreeNode&gt;();
+
+   public void addChildOnly(TreeNode child) throws InterruptedException{
+      synchronized(this) {
+         synchronized(child) {
+            if(!this.children.contains(child)){
+               this.children.add(child);
+            }
+         }
+      }
+   }
+
+   public void setParentOnly(TreeNode parent) throws InterruptedException{
+      synchronized(this) {
+         synchronized(parent) {
+            this.parent = parent;
+         }
+      }
+   }
+}
+</pre>
+</blockquote>
+</p>
+
+<p>
+
+
+Describe a deadlock which might arise in assembling a tree of <code class="prettyprint">TreeNode</code>s.
+What strategy would you use to resolve this deadlock? 
+Illustrate your strategy with a simple example involving two threads, in which one thread adds a given child 
+node and the other sets that child node's parent to be the first node.
+</p>
+
+</body></html>

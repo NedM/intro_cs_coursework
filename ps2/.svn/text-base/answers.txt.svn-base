@@ -1,0 +1,57 @@
+ANSWERS FOR PROBLEM SET 2:
+---------------------------
+
+Part A:
+
+2. 
+Constructors:
+public BinarySearchTree()
+
+Producers:
+
+Mutators:
+public void insert(int key)
+public void remove(int key)
+public void removeMin()
+public void makeEmpty()
+protected BinaryNode insert(int key, BinaryNode node)
+protected BinaryNode remove(int key, BinaryNode node)
+protected BinaryNode removeMin(BinaryNode node)
+
+Observers:
+public int findMin() 
+public int findMax()
+public int find(int key)
+public boolean contains(int key)
+public boolean isEmpty()
+protected int elementAt(BinaryNode node)
+protected BinaryNode findMin(BinaryNode node)
+protected BinaryNode findMax(BinaryNode node) 
+protected BinaryNode find(int key, BinaryNode node)
+protected void checkRep() 
+
+3. Both DuplicateItemException and ItemNotFoundException inherit from (subclass) RuntimeException which means that
+they do not need to be handled in the binary tree code itself but may be caught and handled by a developer using this
+tree implementation as they like. This makes sense because each developer using the tree implementation may have a
+different way of handling these cases and should be free to handle them as they choose.  
+
+---------------------------
+
+Part B:
+
+3. The limited return values from BinaryTreeItem are safer in that they are less likely to cause odd issues in cases where the
+difference between the two objects is greater than Integer.MaxInt or less than Integer.MinInt. However the return values of String.CompareTo
+do provide a bit more information about the degree of difference between the objects. Ultimately, the return values of BinaryTreeItem.CompareTo
+protect against more bugs than String.CompareTo and so are probably preferable.
+
+---------------------------
+
+Part C:
+
+1. The code in AugmentedBinarySearchTree uses the propagate upward method of updating its information. This is made evident by the code in 
+private void updateAugmentation(AugmentedBinaryNode node) which works recursively from the leaf to the root. This recursive method call in particular
+indicates the direction of update: updateAugmentation((AugmentedBinaryNode) node.parent);
+
+4. If the check rep code is implemented incorrectly it may return a false positive. For example, if you used the same strategy to update
+the augmented value as used in the check rep, you wouldn't actually be testing anything, just validating two equivalent statements are equal. 
+this is tantamount to making your check rep test true == true.

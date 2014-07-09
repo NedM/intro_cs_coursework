@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="main.css" type="text/css">
+	<link href="prettify.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="prettify.js"></script>
+<title>Problem Set 1: Programming With Java</title>
+</head><body onload="prettyPrint()">
+
+<table>
+<tbody><tr valign="bottom">
+<td>
+<h1>6.005 Elements of Software Construction | Spring 2011<br>
+Problem Set 1: Programming With Java<br>
+Due: Monday, February 14, 2011 at 11:59pm
+</h1>
+</td>
+</tr>
+</tbody></table>
+<p>
+The purpose of this problem set is to give you practice programming Java programs. You'll debug buggy code and implement a specification. Pull out the problem set code from <a href="https://courses.csail.mit.edu/6.005/svnadmin/">SVN admin</a>.
+</p>
+<h2>Problem 0: Warm Up</h2>
+<p>
+An object from a class StringToWords (available in StringToWords.java) produces a sequence of strings, one in each call to next().  The client may only call next() if hasNext() returns true.
+</p>
+<p>
+<b>1. [10 points]</b> Your task is to implement the methods next() and hasNext() in the class StringToWords (found in ps1.warmup). Its constructor takes a String as argument, and next() should return the sequence of space-separated words in the string. Assume that behavior is undefined for more than one space characters between words, and non-space whitespace characters (like tab or newline) are not considered spaces. For example, this program:
+<blockquote>
+<pre class="prettyprint">public class StringToWordsTester {
+    public static void main(String args[]) {
+        StringToWords stw = new StringToWords("  This is 6.005.   ");
+        while (stw.hasNext()) {
+            System.out.println("&lt;"+stw.next()+"&gt;");    
+        }  
+    }
+}</pre>
+ </blockquote>
+
+should print
+<p>&#060;This&#062;</p>
+<p>&#060;is&#062;</p>
+<p>&#060;6.005.&#062;</p>
+
+StringToWordsTester is also found in ps1.warmup.
+</p>
+<h2>Problem 1: Debugging</h2>
+<p>
+
+Ben Bitdiddle, eager to test his new Java skills, created a Java class that models people. You can find his code in the package ps1.debug. His Person class is displayed below:
+ 
+ <blockquote>
+<pre class="prettyprint">public class Person {
+    private String name;
+
+    public Person(String name){
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean hasSameName(Person person){
+        return person.name == this.name;
+    }
+
+    @Override
+    public String toString(){
+        return "[Name: " + this.name + "]";
+    }
+}</pre>
+ </blockquote>
+ 
+Ben decided that he should be the only person named Ben so he wrote a class, RemovePeople.java, that removes all Person objects that have the name "Ben." That code is also found in ps1.debug but is reprinted below:
+ 
+<blockquote>
+<pre class="prettyprint">public class RemovePeople {
+    public static void main(String[] args) {
+        Person ben = new Person("Ben");
+        ArrayList<Person> persons = new ArrayList<Person>();
+        persons.add(new Person(new String("Ben")));
+        persons.add(new Person(new String("Alyssa")));
+        persons.add(new Person(new String("Alice")));
+        for (Person person : persons){
+            if (person.hasSameName(ben)) {
+                persons.remove(person);
+            }
+        }
+        System.out.println(persons);
+    }
+}</pre>
+ </blockquote>
+ 
+<b>1. [5 Points]</b>  Unfortunately, this code does not seem to remove people who have the name Ben. Allysa P. Hacker suggested that there may be something wrong with Ben's hasSameName method in Person. Fix that method.
+</p>
+<!--<p>
+
+<b>[Optional]</b>  Instead of modifying hasSameName, what one line of code could Ben have added to the Constructor?
+</p>
+<p>
+-->
+ <b>2. [15 Points]</b> After listening to Allysa's advice Ben ran the code again, but now it throws an exception. What exception is thrown? Why is this happening? Fix the code in RemovePeople.java.
+</p>
+	 Now that his Person code works, Ben decided he wanted to make a subclass of Person called Student, which looks like this (and is available in Student.java in ps1.debug):
+		
+<blockquote>
+<pre class="prettyprint">
+public class Student extends Person {
+	private String grade;
+	private String daysAttended;
+
+	public Student(String name, String grade, String daysAttended) {
+		super(name);
+		this.grade = grade;
+		this.daysAttended = daysAttended;
+	}
+
+	public void inflateGrade(){
+		this.grade.replace("-", "+");
+	}
+	
+	public void boostAttendance(){
+		this.daysAttended += 2;
+	}
+
+	@Override
+	public String toString(){
+		return "[Name: " + this.getName() + ", Grade: "+this.grade+ ", Days attended; " + this.daysAttended + "]";
+	}
+}
+</pre>
+</blockquote>	
+	The Student class adds a field called grade. A grade is a String that has a letter possibly followed by a “+” or “-” such as “B-” or “A”. Ben was feeling magnanimous so he wrote a grade inflation function that changes all “-”s to “+”s. So a "C-" would become a "C+" but an "A" would stay an "A" 
+</p>
+<p>	
+	<b>3. [10 Points]</b> Unfortunately, the inflateGrade method does not actually seem to change the grade variable. Fix Ben's method and run InflateGrades.java to confirm Ben's code now works.
+</p>
+  The Student class also adds a field called daysAttended, which is a String that
+tracks how many days of class a student attends throughout the semester. Ben also decided to add a convenient way to improve a student's attendance, boostAttendance(), which simply increases the number of days a student attended by 2.
+<p>	
+	<b>4. [10 Points]</b> Sadly, boostAttendance does not appear to have the proper behavior
+either. Fix the problem by editing the boostAttendance method of
+Student. Do not change the type of daysAttended.  Now run
+InflateGrades.java to confirm that the problem is fixed.
+</p>
+<h2>Problem 2: Extending Functionality</h2>
+<p>In this problem, we'll add some functionality to code we've seen in lecture already. Recall in lecture that a simple cache was presented. 
+<blockquote><pre class="prettyprint">
+public class Cache {
+    private Page[] cache = new Page[100]; // contains Pages and null references
+    private int cachePointer = 0; // index of next slot available for a page
+        
+    /*
+     * Returns a cached Page object p such that p.getURL() is url.
+     * Returns null if no page for url found in the cache.
+     */
+    public Page get(URL url) {
+        for (Page p : cache) {
+            if (p == null) continue;
+            else if (p.getURL().equals(url)) return p;
+        }
+        return null;
+    }
+    
+    /*
+     * Store page in the cache.
+     */
+    public void put(Page page) {
+        cache[cachePointer] = page;
+        ++cachePointer;
+        if (cachePointer >= cache.length) cachePointer = 0;
+    }   
+}
+
+public class Page {
+    // fields
+    private URL url;
+    private String content;
+    private static Cache cache = new Cache();
+
+    // constructor
+    /**
+     * Make a new Page for a URL, downloading it immediately. Throws IOException
+     * if an error occurs accessing the web server.
+     */
+    public Page(URL url) throws IOException {
+        this.url = url;
+        if (download()) {
+            cache.put(this);
+        }
+    }
+    …
+}
+</pre></blockquote>
+One obvious problem is that since web pages may change often, for certain usage
+patterns, our cache will keep an outdated copy of a given webpage for an extended
+period of time. One way to fix this problem is to create an alternate constructor for Page that takes an additional argument as follows:
+<blockquote><pre class="prettyprint">
+public Page(URL url, bool refresh) throws IOException {
+    ...
+}
+</pre></blockquote>
+If refresh is false, this alternate constructor should behave identically to the original constructor. If refresh is true, the constructor should fetch a new copy of the URL, and update the cache with the new content (potentially discarding the stale copy, if present).
+<p><b>1. [15 points]</b> Fill in the implementation of the new Page constructor, as described above.
+</p>
+In addition to the alternate Page constructor, we wish to also add a method to the Cache class that forcefully refreshes every page in the cache. That is, for each Page currently present in the array of Pages, try to update the Page's content with a fresh version by calling fetch again.
+<blockquote><pre class="prettyprint">
+public void refreshCache() {
+    ...
+}
+</pre></blockquote>
+<p><b>2. [15 points]</b> Fill in the implementation of refreshCache() as described above. In particular, note that refreshCache() does not have the potential of throwing an IOException. If a page exists in the cache and calling fetch results in an IOException being thrown, refreshCache should remove that Page from the cache.
+</p>
+Run CacheTest to test your implementation for parts 1 and 2. CacheTest should print "Success!" if your implementations are complete.
+
+<p>NOTE: CacheTest may not be a full test of the implementation as specified; passing it is necessary to get full credit, but is not a guarantee. You should scrutinize your implementation and write supplemental tests, if necessary.
+
+<p>Below is the Weather extension that was introduced in lecture. It is a subclass of Page that is specialized to retrieve the weather.
+
+<blockquote><pre class="prettyprint">
+public class Weather extends Page {
+    /**
+     * Makes a Weather object for a US zipcode.
+     * Requires zipcode to be a valid 5-digit zipcode.
+     */
+    public Weather(String zipcode) throws IOException {
+        super(new URL("http://weather.yahooapis.com/forecastrss?p=" + zipcode));        
+    }
+
+    @Override
+    protected boolean download() throws IOException {
+        boolean cacheMiss = super.download();
+        if (cacheMiss) {
+            String line = Match.between(this.getContent(),
+                    "&lt;yweather:condition", "/&gt;");
+            this.condition = Match.between(line, "text=\"", "\"");
+            this.temperature = Integer.valueOf(Match.between(line, "temp=\"",
+                    "\""));
+        } else {
+            Page p = getCache().get(getURL());
+            if (p instanceof Weather) {
+                Weather w = (Weather) p;
+                this.condition = w.condition;
+                this.temperature = w.temperature;
+            }
+        }
+        return cacheMiss;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+ 
+}
+
+public class WeatherTest {   
+    public static void main(Strin[] args) {
+        
+         downloadPage("http://www.google.com");
+         downloadPage("http://www.google.com");
+
+         downloadPage("http://weather.yahooapis.com/forecastrss?p=02139");
+
+         downloadWeather("02139");
+        
+    }
+}
+
+</pre></blockquote>
+<p><b>3. [20 points]</b> Above is the Weather Class we saw in lecture. We have seen that the downloadWeather("02139") call prints null. Your job in this part is to fix this problem. Run WeatherTest to verify that your fix is correct. In particular, the weather in 02139 should be present.</p>
+<!--
+<p><b>3. [5 points]</b>Until now you used the static cache methods. Abract the cache mechanism by Creating a Cache class that provide "put" and "get" methods and use the Cache object inside Page class as a member.
+</p>
+<p><b>4. [10 points]</b>Provide a different underlying data structure for the Cache class other than primitive array type.
+</p>
+<p><b>[Optional]</b>Do quesiton 3 and 4 Using Java interface and implements the interface using two different data structure</p>-->
+</body></html>

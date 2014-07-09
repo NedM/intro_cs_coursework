@@ -1,0 +1,30 @@
+
+public class HelloWorldClass 
+{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{			
+		HelloWorldClass.SayHello("Puyao");
+		
+		HelloWorldClass myHelloWorld = new HelloWorldClass();
+		myHelloWorld.HelloToYou("Ned");
+	}
+
+	/**
+	 * Says Hello to the person you specify
+	 * @param whomToSayHelloTo - The person you want to say hello to
+	 */
+	private static void SayHello(String whomToSayHelloTo)
+	{
+		//Say "hello" to someone
+		System.out.println("Hello, " + whomToSayHelloTo + "!\n");
+	}
+	
+	private void HelloToYou(String whoAreYou)
+	{
+		System.out.println("Well, hello to " + whoAreYou + " indeed!");
+	}
+}

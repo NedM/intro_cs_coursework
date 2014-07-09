@@ -1,0 +1,19 @@
+gsave
+1.5 setlinewidth
+144.0 144.0 translate
+0.0 0.0 72.0 0.0 360.0 arc
+stroke
+grestore
+gsave
+1.5 setlinewidth
+144.0 432.0 translate
+0.0 0.0 72.0 0.0 360.0 arc
+fill
+grestore
+gsave
+10.0 setlinewidth
+432.0 144.0 translate
+0.0 0.0 72.0 0.0 360.0 arc
+stroke
+grestore
+

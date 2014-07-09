@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang=en lang=en>
+<head>
+	<meta http-equiv=content-type content="text/html; charset=utf-8" />
+	<link rel=stylesheet href="main.css" type="text/css" />
+<title>Lab 3: Graphical User Interfaces in Swing</title>
+</head>
+<body>
+
+<h1>Lab 3: Graphical User Interfaces in Swing</h1>
+<div style="font-weight: bold">6.005 Elements of Software Construction<br>
+Spring 2011<br>
+Due: Friday, April 15</div>
+
+<p>In this lab, you will become familiar with GUI programming and the Java Swing user interface toolkit. You will learn about:</p>
+
+<ul>
+<li>Swing widgets, including windows, labels, text fields, lists, scroll panes, menu bars, and buttons;</li>
+<li>using a layout manager to automatically arrange widgets in a window;</li>
+<li>using action listeners to respond to user input;</li>
+<li>and using a standard dialog provided by Swing.</li>
+</ul>
+
+<p>Swing, and graphical user interface programming in general, is filled with complex APIs and complicated control flow mechanisms. This lab should give you the basic tools you need to complete Project 2.</p>
+
+<h2>Before Lab</h2>
+
+<p>Before coming to lab, please do the following:</p>
+<ul>
+<li>Read this lab handout.</li>
+<li>Check out the <tt>guiwords</tt> project from your personal SVN repository.</li>
+<li>If you are new to GUI or Swing programming, familiarize yourself with <a http://download.oracle.com/javase/tutorial/uiswing/">The Swing Tutorial</a>. Don't try to read the entire tutorial, but do have an idea of what you can find there. Here are some of the most useful sections:</li>
+<ul>
+<li><a href="http://download.oracle.com/javase/tutorial/uiswing/components/index.html">Using Swing Components</a>, which includes a <a href="http://java.sun.com/docs/books/tutorial/ui/features/components.html">visual index</a> of available components and lots of how-tos, is the most immediately useful. In this lab, you will already be using
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/toplevel.html">a top-level container</a>,
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/button.html">buttons</a>,
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/textfield.html">text fields</a>,
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/label.html">labels</a>,
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/list.html">lists</a> and <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/model.html"> models</a>,
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/scrollpane.html">scroll panes</a>,
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/menu.html">menus</a>,
+<a href="http://download.oracle.com/javase/tutorial/uiswing/components/dialog.html">dialogs</a>,
+and others.</li>
+<li><a href="http://download.oracle.com/javase/tutorial/uiswing/events/index.html">Writing Event Listeners</a> discusses just that.</li>
+<li><a href="http://download.oracle.com/javase/tutorial/uiswing/concurrency/initial.html">Concurrency in Swing</a> covers some important details of multithreaded GUI programming.</li>
+</ul>
+<li>Read through the <a href="http://java.sun.com/products/jfc/tsc/articles/tablelayout/">tutorial on TableLayout</a>.</li>
+</ul>
+
+<h2>Word Finder</h2>
+
+<p>Word Finder will be a simple application that presents a basic but functional interface for searching a list of words.</p>
+
+<p>The skeleton of this application is provided for you as follows:</p>
+
+<ul>
+<li><tt>words</tt>: a dictionary of about 45,400 words taken from the standard
+Linux <tt>/usr/share/dict/words</tt>.
+
+<li><tt>WordList</tt>: a backend class that represents a list of words and
+provides operations for loading the list from a stream and searching the list.
+
+<li><tt>WordFinder</tt>: a skeleton for the user interface you will implement
+in this lab.
+</ul>
+
+<h2>Getting Started</h2>
+
+<p>Begin by running the main methods in <tt>WordList</tt> &mdash; it should output a list of words containing &quot;ph&quot; &mdash; and <tt>WordFinder</tt>, which should display a very preliminary UI.</p>
+
+<p><b>Task 1</b>: <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JTextField.html#addActionListener(java.awt.event.ActionListener)">Add an ActionListener</a> to 
+the <tt>find</tt> <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JTextField.html">JTextField</a> so that pressing &quot;enter&quot; uses <tt>words</tt> to 
+search for the <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/text/JTextComponent.html#getText()">current text in the field</a> and display the results on 
+the console (i.e., <tt>System.out</tt>).</p>
+
+<img src="img/task1.png" width="528" height="237" alt="Getting Started"/>
+
+<h2>Layout, Lists, and Labels</h2>
+
+<p>A <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/awt/LayoutManager.html">LayoutManger</a> determines how components within a <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/awt/Container.html">container</a> 
+like <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JFrame.html">JFrame</a> are arranged. The default <tt>LayoutManger</tt> for <tt>JFrame</tt>s, 
+<a href="http://download.oracle.com/javase/1.4.2/docs/api/java/awt/BorderLayout.html">BorderLayout</a>, is simple but not very powerful. Java provides several other layout managers, <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/awt/GridBagLayout.html">some of which</a> are notoriously complicated.</p>
+
+<p><a href="https://tablelayout.dev.java.net/">TableLayout</a> is the alternative we will use for this lab, and which you are encouraged to use for the project. Read the documentation and <a href="http://java.sun.com/products/jfc/tsc/articles/tablelayout/">this tutorial</a>.</p>
+
+<p>TableLayout arranges the user interface in a logical table of cells. A 2D array of doubles is used to specify the percentage or absolute width and height of the columns and rows of the table.</p>
+
+<p>We would like to lay out the final interface of the Word Finder application like this:</p>
+
+<p><img src="img/wordfinder.png" width="541" height="307" alt="Word Finder Table Layout"/></p>
+
+<p>In this diagram, PREFERRED indicates that the width or height of the column or row is determined by the &quot;preferred&quot; size of the components in it, and FILL indicates that the column or row expands to take up any remaining space when the window is shown or its size is changed by the user.</p>
+
+<p><b>Task 2</b>: Set the <tt>JFrame</tt>'s layout manager to an appropriately-initialized <tt>TableLayout</tt>. Update the <tt>add(...)</tt> component calls to replace the <tt>BorderLayout</tt> information with the <tt>&quot;column, row&quot;</tt> <tt>String</tt> used by <tt>TableLayout</tt>.</p>
+
+<p>A <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JList.html">JList</a> is the appropriate component to display the list of matched words. A <tt>JList</tt> separates the presentation of those words from the list itself by having a separate <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/ListModel.html">ListModel</a>. For this lab, you can safely use a <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/DefaultListModel.html">DefaultListModel</a>, and add or remove items from this model as needed.</p>
+
+<p><b>Task 3</b>: Add to the window a <tt>JList</tt> contained inside a <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JScrollPane.html">JScrollPane</a>. Modify your code so that instead of outputting the matched words to the console, they appear in the scrollable list.</p>
+
+<p><tt>JScrollPane</tt> provides scrolling behavior for components that are too large to display in their entirety and is one example of how the <i>view hierarchy</i> (<tt>JList</tt> inside <tt>JScrollPane</tt> inside <tt>JFrame</tt>) is used to control component display.</p> 
+
+<p><b>Task 4</b>: In addition to the list of results, it is also useful to know the number of matched words. Add a <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JLabel.html">JLabel</a> to your interface that is updated after every search to display the number of matches.</p>
+
+<div class="boxed">
+<img src="img/check.gif" width="16" height="16"/> <b>Checkoff.</b> Find a TA or another member of the course staff and demonstrate your working interface.
+</div>
+
+<h2>Click Me!</h2>
+
+<p>It is essential to organize your implementation so that actions are separated from the particular GUI components that trigger them.</p>
+
+<p><b>Task 5</b>: Add a &quot;Search&quot; button to the interface so that in addition to pressing &quot;enter,&quot; the user can click &quot;search&quot; to update the list of matched words. If necessary, refactor your implementation so that code is not duplicated. At the same time, you should also ensure that when the interface is first displayed, it is identical to what appears when the user searches for the empty string.</p>
+
+<p>Finally, no interface would be complete without a good old fashioned menu bar. And no user interface toolkit would be complete without providing standard dialogs for actions that ought to be consistent across applications, such as choosing a file from the disk. We'll put both of those features to use.</p>
+
+<p><b>Task 6</b>: Give your interface a <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JMenuBar.html">JMenuBar</a> with a &quot;File&quot; <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JMenu.html">JMenu</a>. On this menu, have at least two options:</p>
+
+<ul>
+<li><b>Open...</b>, which should use a <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JFileChooser.html">JFileChooser</a> to show an &quot;Open File&quot; dialog in which the user can choose a new word list. Note that <tt>WordList</tt> already provides a <tt>load(...)</tt> method once you have obtained an <tt>InputStream</tt> for the chosen file.</li>
+<li><b>Exit</b>, which should... exit the application, for example by using <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/lang/System.html#exit(int)">System.exit(...)</a>.</li>
+</ul>
+
+<p>The Javadoc documentation for <tt>JFileChooser</tt> includes an example that should make this task straightforward. <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/swing/JOptionPane.html">JOptionPane</a> is another important source for standard dialog boxes.</p>
+
+<h2>Finishing Touch</h2>
+
+<p><b>Task 7</b>: You choose...</p>
+
+<p>To finish off this simple Word Finder interface, implement one more feature of your choosing, as time in the lab permits. This can be anything you like; here are some suggestions:</p>
+
+<ul>
+<li>Add a &quot;Clear&quot; button that clears the text field and resets the current search.</li>
+<li>Add a check box to enable or disable case-sensitivity in the search.</li>
+<li>Use a different listener on the text field so that searches happen <i>incrementally</i> as you type, and pressing &quot;enter&quot; or clicking &quot;search&quot; is unnecessary.</li>
+<li>Change the list display so that the part of each word that matches the user's search term is highlighted. (Hint: Swing supports <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/html.html">basic HTML</a>, which you may find helpful.)</a></li>
+<li>Improve the performance of Word Finder and eliminate the word list loading delay by implementing a custom list model.</li>
+</ul>
+
+<div class="boxed">
+<img src="img/check.gif" width="16" height="16"/> <b>Checkoff.</b> Find a TA or another member of the course staff and demonstrate your final interface, including any extra features.
+</div>
+
+<h2>Commit Your Work</h2>
+
+<p>This is the end of the lab.  Be sure to commit your solutions to your
+personal repository.</p>
+
+</body>
+</html>

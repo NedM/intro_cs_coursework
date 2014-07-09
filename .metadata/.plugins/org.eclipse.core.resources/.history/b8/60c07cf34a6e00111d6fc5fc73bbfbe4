@@ -1,0 +1,15 @@
+
+public class HelloWorldClass 
+{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{
+		//Write "Hello, World!" to the console
+		
+
+	}
+
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="main.css" type="text/css">
+	<link href="prettify.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="prettify.js"></script>
+<title>Problem Set 3: Labyrinth</title>
+</head><body onload="prettyPrint()">
+
+<table>
+  <tbody>
+    <tr valign="bottom">
+      <td>
+	<h1>
+	  6.005 Elements of Software Construction | Spring 2011<br>
+	  Problem Set 3: Labyrinth<br>
+	  Due: Wednesday, March 30, 2011 at 11:59pm
+	</h1>
+      </td>
+    </tr>
+</tbody>
+</table>
+
+<p>
+The purpose of this problem set is to give you practice in using the factory design pattern and state
+machine modeling.
+</p>
+
+<h2>Maze</h2>
+
+
+<h3>Part A: Factory design pattern [40 points]</h3>
+
+<p>You will write factory methods to create rooms in a maze.</p>
+
+<p>A maze is a collection of square rooms, each having an <em>X</em> and a <em>Y</em> coordinate.
+A room can have north, east, south and/or west walls. When the user first creates a maze,
+it has a single room at <em>(0,0)</em>. Subsequent rooms are created by digging: the method
+<em>Room dig(Room room, Direction dir)</em> of <em>Maze</em> returns a new room that can be reached by
+going in direction <em>dir</em> from <em>room</em>. Suppose <em>room1</em> has
+coordinates <em>(x,y)</em>. Then
+<ul>
+<li><em>dig(room1,NORTH)</em> returns a room with coordinates <em>(x,y+1)</em></li>
+<li><em>dig(room1,EAST)</em> returns a room with coordinates <em>(x+1,y)</em></li>
+<li><em>dig(room1,SOUTH)</em> returns a room with coordinates <em>(x,y-1)</em></li>
+<li><em>dig(room1,WEST)</em> returns a room with coordinates <em>(x-1,y)</em></li>
+</ul></p>
+<p>A maze should never have two rooms with the same pair of coordinates. If a maze has rooms at
+<em>(x,y)</em> and <em>(x,y+1)</em>, calling <em>maze.dig(maze.getRoom(x,y), NORTH)</em> should break
+down the wall between the two rooms and return the existing room at <em>(x,y+1)</em> (likewise
+for the other directions, <em>mutatis mutandis</em>).</p>
+
+<p><strong>1.</strong> To create rooms, the generic <em>Maze</em> provides the method
+<em>Room createRoom(int x, int y)</em>. This creates a new <em>Room</em> object at coordinates <em>(x,y)</em>
+and adds it to the maze. Now you would like to create a subtype of <em>Maze</em> with its own special
+rooms. Fill in the implementation of the <em>EnchantedMaze</em> class with a factory method to create
+rooms of type <em>EnchantedRoom</em> rather than the generic <em>Room</em>. <strong>[15 points]</strong></p>
+
+<p><strong>2.</strong> Write the <em>dig(Room, Direction)</em> method. 
+This method should use the <em>createRoom</em> method you wrote above to create rooms of the correct type.
+Uncomment the digging code in <em>MazeGame</em>'s <em>main</em> method and verify that it produces the
+following easily solvable maze: <strong>[25 points]</strong></p>
+
+<img src="trivial-maze.png">
+
+<h3>Part B: Maze solver with strategy pattern [60 points]</h3>
+
+<p>You will write a pair of strategies for solving a maze.</p>
+
+<p>One way to traverse a maze is to use the "wall-following algorithm": as you travel through the
+maze, keep your hand on the left wall, turning as necessary. (So, for instance, if you enter a room
+from the south, you take the west exit if available, otherwise the north if available, otherwise... etc.)</p>
+
+<p><strong>1.</strong> Complete the <em>WallFollower</em> class, an implementation of the <em>MazeSolver</em>
+interface, by adding a field to maintain the state of your maze solver---this is the direction
+the solver is currently facing---and implementing the <em>visit(Room)</em> method. <strong>[30 points]</strong></p>
+
+<p>A drawback of the above algorithm is that it is not guaranteed to get you out of any maze. If the
+entrance and exit to a maze are on the same wall, then the wall-following algorithm works. But, if you
+start off next to an inner wall of the maze, you will end up following it all the way around,
+and never traverse the entire maze. Indeed, consider the following small maze:</p>
+
+<img src="small-maze.png">
+
+<p>As the exit room is not next to a wall, a wall-follower will never find it. You can create this maze
+using <em>Maze.makeExample2()</em>--try stepping through it with your <em>WallFollower</em> strategy.
+
+<p><strong>2.</strong> Complete the <em>ImprovedSolver</em> class with an implementation that is
+guaranteed to solve any maze. Here is a description, from Wikipedia, of Tremaux's algorithm, the
+algorithm we would like you to use to do this:</p>
+<p><em>Tremaux's algorithm, invented by Charles Pierre Tremaux, is an efficient method to find the way out
+of a maze that requires drawing lines on the floor to mark a path, and is guaranteed to work for all
+mazes that have well-defined passages. A path is either unvisited, marked once or marked twice.
+Every time a direction is chosen it is marked by drawing a line on the floor (from junction to junction).
+In the beginning a random direction is chosen (if there is more than one). On arriving at a junction that
+has not been visited before (no other marks), pick a random direction (and mark the path). When arriving
+at a marked junction and if your current path is marked only once then turn around and walk back (and
+mark the path a second time). If this is not the case, pick the direction with the fewest marks (and
+mark it, as always). When you finally reach the solution, paths marked exactly once will indicate a
+direct way back to the start. If there is no exit, this method will take you back to the start where
+all paths are marked twice. In this case each path is walked down exactly twice, once in each direction.</em></p>
+
+<p>(Find a video of the algorithm in action at
+<a href="http://www.youtube.com/watch?v=6OzpKm4te-E">http://www.youtube.com/watch?v=6OzpKm4te-E</a>.)</p>
+
+<p>Note that Tremaux's algorithm requires you to "mark" your path, keeping track of each time a room has
+been visited and the direction from which it was entered and exited. Do this by augmenting your solver class
+with a data structure containing this information. <em>(N.B. Do <strong>not</strong> modify the
+Room class or other classes in package maze.)</em> <strong>[30 points]</strong></p>
+
+<p>Note: A correct implementation of Tremaux's algorithm should efficiently complete the following
+example, which you can create using the method <em>Maze.makeExample3()</em>.</p>
+
+<img src="medium-maze.png">
+
+<p>Grading for this problem set will take efficiency of your solution into account; credit
+will not be awarded for a strategy that takes more than 250 steps to complete this maze.
+(This is to keep our automated grading suite from being tied up forever.)
+We recommend writing a deterministic algorithm and verifying it on the above example.</p>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/6.005/sp11/!svn/ver/20858/groups/antibattleship/jven-nedmurp-jboortz/src/message
+END
+ABSAcceptVictoryMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSAcceptVictoryMessage.java
+END
+ABSVictoryMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSVictoryMessage.java
+END
+ABSRejectVictoryMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSRejectVictoryMessage.java
+END
+ABSBoardHashMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSBoardHashMessage.java
+END
+ABSTargetMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSTargetMessage.java
+END
+ABSResultsMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSResultsMessage.java
+END
+ABSGameErrorMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSGameErrorMessage.java
+END
+InvalidMessageException.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/InvalidMessageException.java
+END
+ABSGameAcceptMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSGameAcceptMessage.java
+END
+MsgType.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/MsgType.java
+END
+ABSGameDenyMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSGameDenyMessage.java
+END
+ResultType.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ResultType.java
+END
+ABSMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/6.005/sp11/!svn/ver/20858/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSMessage.java
+END
+ABSSyntaxErrorMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSSyntaxErrorMessage.java
+END
+ABSInitGameMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/message/ABSInitGameMessage.java
+END

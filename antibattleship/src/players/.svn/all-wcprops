@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/6.005/sp11/!svn/ver/20858/groups/antibattleship/jven-nedmurp-jboortz/src/players
+END
+NetworkPlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/6.005/sp11/!svn/ver/20858/groups/antibattleship/jven-nedmurp-jboortz/src/players/NetworkPlayer.java
+END
+GUIPlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/6.005/sp11/!svn/ver/20099/groups/antibattleship/jven-nedmurp-jboortz/src/players/GUIPlayer.java
+END
+HumanConsolePlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/players/HumanConsolePlayer.java
+END
+ListeningRefPlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/players/ListeningRefPlayer.java
+END
+AsciiConsolePlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/6.005/sp11/!svn/ver/20383/groups/antibattleship/jven-nedmurp-jboortz/src/players/AsciiConsolePlayer.java
+END
+ABSPlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/6.005/sp11/!svn/ver/20639/groups/antibattleship/jven-nedmurp-jboortz/src/players/ABSPlayer.java
+END

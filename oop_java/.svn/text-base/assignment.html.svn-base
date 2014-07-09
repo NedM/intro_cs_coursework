@@ -1,0 +1,474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="main.css" type="text/css" />
+<title>Lab 0.2: Java Tools and Basic Java for OOP</title>
+</head>
+
+<body>
+<table>
+<tr valign="bottom">
+<td>
+<h1>6.005 Elements of Software Construction<br/>
+
+Spring 2011<br/>
+
+<!-- TODO please see REVISE ME notes below -->
+
+Lab 0.2: Object-Oriented Java, and More Tools<br/>
+</h1>
+</td>
+</tr>
+</table>
+
+<p>In this lab, you will learn about basic object oriented programming in Java, and get some experience with some new tools and techniques,
+including unit testing with JUnit and using Subversion with multiple developers.
+</p>
+
+<h2>Before Lab</h2>
+
+<p>Before coming to lab, please do the following:</p>
+<ul>
+<li><b>Read the lab handout and required readings.</b>  You won't have time in lab to read, so do it first.</li>
+<li><b>Check out the <tt>oop_java</tt> module from your personal directory on the SVN
+repository.</b> Please review <a href="../procedural_java/assignment.html">Lab 0.1</a> if you do not know how to do this.</li>
+</ul>
+
+<h2><a name="junit">Automated Unit Testing with JUnit</a></h2>
+
+<!-- REVISE ME: the students should write JUnit tests based on descriptions we give them -->
+
+<p>
+Readings:
+</p>
+<ul>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/java/javaOO/annotations.html">Annotations</a>
+</li>
+<li><b>(required)</b> <a href="http://junit.sourceforge.net/doc/cookbook/cookbook.htm">JUnit cookbook</a>
+</li>
+</ul>
+
+
+<p>
+	<a href="http://www.junit.org/">JUnit</a> is a widely-adopted Java unit testing library, and we will use 
+	it heavily in 6.005. A major component of the 6.005 design philosophy is to
+	decompose problems into minimal, orthogonal units, which can be assembled 
+	into the larger modules that form the finished program. One benefit of this
+	approach is that each unit can be tested thoroughly, independently of others, 
+	so that faults can be quickly isolated and corrected, as code is rewritten and modules 
+	are configured. Unit testing is the technique of writing tests for the smallest
+	testable pieces of functionality, to allow for the flexible and organic evolution of
+	complex, correct systems.
+</p>
+<p>
+	By writing thoughtful unit tests, it is possible to verify the correctness of 
+	one's code, and to be confident that the resulting programs behave as expected. In this
+	lab, you will learn the basic vocabulary of JUnit, how to run existing tests, and
+	how to write new ones. In 6.005, we will use JUnit version 4.
+</p>
+
+<h3>The Anatomy of JUnit</h3>
+
+<p>
+	JUnit unit tests are written method by method. There is nothing special a class has to do
+	to be used by JUnit; it only need contain methods that JUnit knows to call, which will
+	be referred to as test methods for the remainder of the lab. Test methods are specified
+	entirely through <em>annotations</em>, which may be thought of as keywords (more 
+	specifically, they are a type of <a href="http://en.wikipedia.org/wiki/Metadata">metadata</a>), 
+	that can be attached to individual methods and classes. Though they do not themselves change
+	the meaning of a Java program, at run-time other Java code can detect the annotations of
+	methods and classes, and make decisions accordingly. The Java annotation system, judiciously
+	used, can create dynamic and powerful code. Though we will not deeply explore 
+	annotations in 6.005, you will see how other libraries, such as JUnit, make effective 
+	use of them.
+</p>
+
+<p>
+	In the <tt>test</tt> package, you will find a pair of files, <tt>FibonacciGenerator.java</tt>, 
+	and <tt>FibonacciTest.java</tt>. <tt>FibonacciGenerator.java</tt> contains the implementation
+	for a class that is a bidirectional generator of Fibonacci numbers. The <tt>FibonacciGenerator</tt>
+	and the <tt>FibonacciTest</tt> classes are written to be used in an object oriented style.
+	That is, a <tt>FibonacciGenerator</tt> is an object that maintains state in its fields (<tt>first</tt> 
+	and <tt>second</tt>), that can only be operated on by the methods exposed through the class 
+	(<tt>next</tt> and <tt>previous</tt>). <tt>FibonacciTest</tt> is written similarly, though
+	it is intended to be used in a specific way, by the JUnit library.
+</p>
+
+<p>
+	Look closely at <tt>FibonacciTest.java</tt>, and note the <tt>@Before</tt>,
+	<tt>@Test</tt>, and <tt>@After</tt> symbols, that precede method definitions. These are
+	examples of annotations. The JUnit library uses these particular annotations to
+	determine which methods to call when running unit tests. The <tt>@Test</tt> 
+	annotation denotes a test method; there can be any number in a single 
+	class. Even if one test method fails, the others will be run. The two test methods are very different. The
+	<tt>generateAndCheck</tt> method contains calls to <tt>assertEquals</tt>, which is an
+	assertion that compares two objects against each other and fails if they are not equal.
+	<a href="http://www.junit.org/apidocs/org/junit/Assert.html">Here is a list of 
+	the other assertions supported by JUnit</a>. If an assertion in a test method fails, that test method 
+	returns immediately, and JUnit records a failure for that test.
+</p>
+
+<p>
+	The other test method, <tt>callIllegalPrevious</tt>, operates very differently, as 
+	it contains no assertions itself. Instead, the assertion is contained within the 
+	annotation itself! What the annotation expresses is that running the 
+	<tt>callIllegalPrevious</tt> method should result in an uncaught 
+	<tt>IllegalStateException</tt> being thrown. If you look at the <tt>previous()</tt>
+	method in <tt>FibonacciGenerator.java</tt>, you can see how  the exception can be 
+	thrown. For the <tt>callIllegalPrevious</tt> test method to succeed, that line must
+	be executed.
+</p>
+
+<p>
+	The final two annotations, <tt>@Before</tt> and <tt>@After</tt>, are easier to
+	explain. Each denotes a method that is called either before or after, 
+	respectively, each test method is called. <tt>@Before</tt> methods are a good
+	way to share common setup code betweeen multiple tests. <tt>@After</tt> 
+	methods can ensure that cleanup code runs, even if a test fails. For example,
+	if you are testing code that writes to a temporary files on disk, you may
+	want to ensure that the temporary files are deleted whether or not the tests fail.
+</p>
+
+<h3>Running Existing Tests</h3>
+
+<p>
+	To run the tests in <tt>FibonacciTest</tt>, simply right click on the 
+	<tt>FibonacciTest.java</tt> file in either your Package Explorer or Navigator view, 
+	and mouse-over the 'Run As' option. Click on the 'JUnit Test' option, and you should 
+	see the JUnit view appear, with a green bar indicating that all test methods ran successfully. 
+</p>
+
+<div style="float:right; margin-left:1em">
+	<a href="img/JunitFail.jpeg"><img src="img/JunitFail.jpeg" style="border:none" width="207" height="268"/></a>
+</div>
+	
+<p>
+        To see what a test failure looks like, try changing the initial value of <tt>first</tt> in <tt>FibonacciGenerator</tt> to something outrageous (like 42), then rerun the tests. You should now
+	see a red bar in the JUnit view, and if you click on <tt>generateAndCheck</tt>, you will see a stack trace in the 
+	bottom box, which provides a brief explanation of what went wrong. 
+	In this case, it expected the first value of the generator to be 0, but it was actually 42 (or whatever value you chose).
+	Double clicking on lines in the Failure Trace will bring up the code for the test that failed.
+</p>
+
+<p>
+	For a more thorough introduction, O'Reilly has a 
+	<a href="http://www.onjava.com/pub/a/onjava/2004/02/04/juie.html"> JUnit and Eclipse
+	tutorial</a>, with screen-shots to help you get acquainted with using JUnit from
+	within Eclipse. The guide was written for JUnit 3, so the code samples
+	use the older (but still supported) JUnit API.
+</p>
+
+<p>
+	Later in the lab, you'll write some unit tests of your own.
+</p>
+
+<br clear="both"/>
+<h2><a name="OOP">Object Oriented Programming in Java</a></h2>
+
+<ol>
+<li><b>Before You Begin</b><br />
+<p>Create a file named <tt>oop_answers.txt</tt> under the oop_java folder
+(in the same directory as <tt>assignment.html</tt>).
+Add it to the SVN repository (right-click on the file &rarr; Team &rarr; Add to Version Control) 
+and put your answers to the questions
+in this section there.</p>
+
+<p />
+<li><b>Warm-up: Light it up</b><br />
+<p>Readings:</p>
+<ul>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/java/javaOO/classes.html">Classes</a> (through "Passing Information to a Method or a Constructor")</li>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/java/javaOO/more.html">More on Classes</a> (through "Summary of Creating and Using Classes and Objects")</li>
+<li>(optional) <a href="http://java.sun.com/docs/books/tutorial/java/javaOO/index.html">Lesson: Classes and Objects</a></li>
+<li>(optional) <a href="http://www.codeguru.com/java/tij/tij0037.shtml#Heading79">The static keyword</a></li>
+<li>(optional) <a href="http://www.codeguru.com/java/tij/tij0071.shtml">The final keyword</a></li>
+</ul>
+
+<p>Java is an object oriented language. As such, Java programs are made up
+of classes. Each class has its own <tt>.java</tt> file with the same name.</p>
+
+<p>Take a look at <tt>Light.java</tt>. Note that it contains a single class
+named Light, which represents a simple light that can be on or off.</p>
+
+<p>Its structure is:</p>
+
+<div class="code"><pre>
+public class Light {
+    // Some fields
+     
+    // Some Constructors
+     
+    // Some Methods
+}
+</pre>
+</div>
+
+<p>The first line is the class declaration and gives the visibility
+of the class, the keyword <tt>class</tt>, and the name of the class.</p>
+
+<p><b>Question:</b> What changes would you have to make in order to rename
+the Light class to ShinyLight?</p>
+
+<p>Just inside the class declaration are the field declarations. Fields are the 
+variables that the class keeps track of.</p>
+
+<p>They tend to look like this:</p>
+<div class="code"><pre>
+  private <i>typeName</i> <i>variableName</i>;
+</pre>
+</div>
+
+<p>You can put certain keywords between the visibility and the typeName
+that change the field's behavior. For example, the keyword <tt>final</tt>
+indicates that the field's value cannot be changed (with certain
+caveats if the value is a mutable Object). The keyword <tt>static</tt> 
+turns the field into a class variable.</p>
+
+<p>Since static fields are not tied to a particular instance, you can
+access them through <tt><i>Classname.fieldName</i></tt>. An example
+of this is the <tt>Math.PI</tt> and <tt>Math.E</tt> fields.
+Creating static final fields are a useful way to declare constants.
+</p>
+
+<p><b>Question:</b> What would happen if we changed Light's isOn field
+to be static and final?</p>
+
+<p>A class's constructors are methods that are used to make a new instance
+of a class. <tt>Light</tt> has two different constructors. A constructor
+can access other constructors in the current class with the method <tt>this()</tt>.</p>
+
+<p><b>Question:</b> What happens when the no-argument constructor, <tt>Light()</tt> is called?</p>
+
+<p>Methods are the operations provided by a class. They tend to look like:</p>
+<div class="code"><pre>
+  public <i>returnType</i> <i>methodName</i> ( <i>arg1Type</i> <i>arg1Name</i>, <i>arg2Type</i> <i>arg2Name</i>, <i>...</i> ) {
+       // body of method
+  }
+
+</pre></div>
+
+<p>Methods can also have keywords between their visibility and returnType. Adding the keyword <tt>static</tt> 
+to a method indicates that the method is not associated with a particular instance of the class.
+An example of this is <tt>Math.max(a, b)</tt>.</p>
+
+<p><b>Question: </b>Why can't static methods directly access non-static fields?</p>
+
+<p><b>Exercise:</b> Fix the problems in <tt>Light.java</tt>. We have included a JUnit test called 
+<tt>LightTest.java</tt> to help with this. You can run this unit test the same way you ran the Fibonacci test, by right-clicking on 
+<tt>LightTest.java</tt> in Packge Explorer 
+or Navigator, then mousing-over 'Run As', then clicking on 'JUnit Test'.
+If you are using Eclipse and are paying attention to its warnings,
+you should be able to find at least one of the bugs without referring to the JUnit results.
+</p>
+</li>
+
+<li><b>A light of a different color</b>
+<p>Readings:</p>
+<ul>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/java/IandI/subclasses.html">Inheritance</a> (through "Using the Keyword super")</li>
+<li>(optional) <a href="http://java.sun.com/docs/books/tutorial/java/package/usepkgs.html">Using Package Members</a></li>
+</ul>
+
+<p>Now take a look at <tt>ColoredLight.java</tt>. A <tt>ColoredLight</tt> is simply a <tt>Light</tt>
+that also has a <tt>Color</tt>. We use the <tt>extends</tt>
+keyword followed by <tt>Light</tt> in the method declaration to indicate that ColoredLight inherits 
+from (is a subclass of) Light.
+We also import <tt>java.awt.Color</tt> for our color property.</p>
+
+<p><b>Exercise:</b> Implement the constructor and methods for <tt>ColoredLight</tt>.</p>
+
+<p>Note that the method <tt>ColoredLight.randomChange()</tt> overrides the parent's method
+<tt>Light.randomChange()</tt>. However, a <tt>ColoredLight</tt> can still access its parent's
+version of the method by calling <tt>super.randomChange()</tt>. A subclass's constructor can access
+a parent's constructor the same way. For example, in <tt>ColoredLight</tt>'s constructors, one could call
+<tt>super()</tt> or <tt>super(<i>boolean</i>)</tt> in order to access <tt>Light</tt>'s constructors.</p>
+
+<p><b>Question:</b> How might <tt>ColoredLight</tt>'s constructor have to change if the no-argument <tt>Light()</tt> constructor was
+not defined? If you are unsure, try deleting that first constructor in <tt>Light.java</tt> and see what
+errors come up in <tt>ColoredLight.java</tt>.</p>
+
+<p><b>Exercise:</b> Create a JUnit test for <tt>ColoredLight</tt> named <tt>ColoredLightTest</tt>. Use
+<tt>LightTest.java</tt> as a model. (To start the file, you can right-click on "lights" and select 
+New &rarr; Class.)</p>
+</li>
+
+<li><b>All in a row</b>
+<p>Readings:</p>
+<ul>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/java/concepts/interface.html">What is an interface?</a></li>
+<li>(optional) <a href="http://java.sun.com/docs/books/tutorial/java/IandI/createinterface.html">Interfaces</a> (whole subsection through "Summary of Interfaces")</li>
+</ul>
+
+<p>We are now going to string some lights together to make light patterns. To do this we are going to define
+an interface, <tt>HolidayLights</tt>. This interface specifies that anything that implements it will have
+a method that will return a sequence of lights representing how the lights will look at the next timeslice (<tt>nextLightSequence()</tt>).</p>
+
+<p><b>Question:</b> What's the difference between an interface and a class?</p>
+
+<p><b>Question:</b> When might you use an interface instead of a class (that can then be subclassed)?</p>
+
+<p>The return type for <tt>nextLightSequence()</tt> is <tt>List&lt;Light&gt;</tt>. This is an example of using 
+<a href="http://java.sun.com/docs/books/tutorial/java/generics/index.html">generics</a>, a very useful Java
+language feature. In our case, it specifies that <tt>nextLightSequence()</tt> must return a <tt>List</tt> that only contains
+<tt>Light</tt>s.</p>
+</li>
+
+<li><b>Running along now</b>
+<p>Readings:</p>
+<ul>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/java/IandI/usinginterface.html">Implementing an Interface</a></li>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/java/javaOO/objectcreation.html">Creating Objects</a></li>
+<li>(optional) <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/ArrayList.html">ArrayList javadocs</a></li>
+<li>(optional) <a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/for.html">The <tt>for</tt> Statement</a> (section about enhanced <tt>for</tt> loops)</li>
+
+</ul>
+
+<p>Now we're going to create a class that implements the <tt>HolidayLights</tt> interface.
+<tt>RunningHolidayLights</tt> is a fixed-length string of lights with exactly one light on
+at a time. The index of the light that is on will increase until it hits the end of the string
+and then start over from the front again.
+</p>
+
+<p>As a result, <tt>RunningHolidayLights.nextLightSequence()</tt> should generate a series of light sequences,
+all of fixed-length <tt>n</tt>. The first sequence it generates should have the first light on
+and all the rest off. The second sequence would have the second light on, and the rest off, and so on.
+</p>
+
+<p><b>Exercise:</b> Implement the <tt>nextLightSequence()</tt> method in <tt>RunningHolidayLights</tt>. Also create
+<tt>RunningHolidayLightsTest.java</tt> to test your implementation. Make sure to test
+the constructor as well as all the methods.</p>
+
+<p>Instead of using a Java array, you should take advantage of Java's <tt>ArrayList</tt> class which implements 
+the <tt>List</tt> interface.  The line:</p>
+
+<div class="code"><pre>
+List&lt;Light&gt; lightList = new ArrayList&lt;Light&gt;();
+</pre>
+</div>
+
+<p>creates a new <tt>ArrayList&lt;Light&gt;</tt>. Note that you must
+import the <tt>ArrayList</tt> class in order to use this. To do so, add</p>
+<div class="code"><pre>
+import java.util.ArrayList;
+</pre>
+</div>
+<p>to the top of your file, after the <tt>package lights;</tt> declaration. In Eclipse,
+you can also hit <b>CTRL-SHIFT-O</b> to automatically <b>O</b>rganize your imports. Eclipse will then
+attempt to figure out what class(es) you mean to import and add them for you. If
+the name of the class that needs to be imported is ambiguous &mdash; for example, 
+there is a <tt>java.util.List</tt> and a <tt>java.awt.List</tt> &mdash; then Eclipse will
+prompt you to choose one to import.</p>
+
+<p><tt>HolidayLightsWindow</tt> is a class we're providing that will give a visual
+representation of anything that implements <tt>HolidayLights</tt>. 
+You should not have to edit any of the code. <tt>Main</tt>
+creates some <tt>RunningHolidayLights</tt> of length 12, puts them in a <tt>HolidayLightsWindow</tt>,
+and makes the window visible.
+</p>
+
+<p>After you have finished implementing and testing <tt>RunningHolidayLights</tt>, run 
+<tt>Main.java</tt> as a Java application 
+(right-click on the file, go to "Run As" and then "Java Application") to
+see the lights!</p> 
+</li>
+
+<li>(Optional) <b>Lights of your very own</b>
+<p>Create a new class <tt>MyHolidayLights</tt>, which implements <tt>HolidayLights</tt>
+but displays a different pattern than <tt>RunningHolidayLights</tt>.</p>
+
+<p>To start you off, here are some suggestions:</p>
+<ul>
+<li>Use <tt>randomChange</tt>.</li>
+<li>Have multiple running lights.</li>
+<li>Have blinking lights.</li>
+<li>Have lights run from both ends.</li>
+<li>Use colored lights.</li>
+<li>Periodically change how the lights behave.</li>
+</ul>
+
+<p>Remember to think of what internal variables it needs to store and any convenience methods 
+it might want to have.</p>
+
+<p>You should also create corresponding <tt>MyHolidayLightsTests</tt>.</p>
+
+<p>Afterwards, change the first line in <tt>Main.java</tt>'s main method
+to instantiate a <tt>MyHolidayLights</tt> instead of a <tt>RunningHolidayLights</tt>.
+Since <tt>HolidayLightsWindow</tt> only depends on the <tt>HolidayLights</tt> interface, 
+it should be able to display your new class.</p>
+</li>
+
+</ol>
+
+<div class="boxed">
+<img src="check.gif" width="16" height="16"/><b>Checkpoint.</b>  Find a TA or 
+another member of the course staff and review your code and
+<tt>oop_answers.txt</tt>.
+</div>
+
+<h2><a name="exceptions">Exceptions</a></h2>
+<p><b>Readings</b></p>
+<ul>
+<li><b>(required)</b> <a href="http://java.sun.com/docs/books/tutorial/essential/exceptions/index.html">Exceptions</a> 
+</li>
+<li>(optional) <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/HashMap.html">HashMap javadocs</a></li>
+<li>(optional) <a href="http://java.sun.com/docs/books/tutorial/java/javaOO/enum.html">Enum Types</a></li>
+<li>(optional) <a href="http://java.sun.com/docs/books/tutorial/essential/io/">Lesson: Basic I/O</a> 
+(especially the <a href="http://java.sun.com/docs/books/tutorial/essential/io/cl.html">I/O from the Command Line</a> section)</li>
+<li>(optional) <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/io/package-summary.html">java.io javadocs</a></li>
+</ul>
+
+<p>Create a file named <tt>exceptions_answers.txt</tt> under the oop_java folder.
+Add it to the SVN repository and put your answers to the questions
+in this section there.</p>
+
+<p>
+Now take a look at the <tt>grades</tt> package.
+</p>
+
+<p>
+<tt>LetterGrade</tt> is an enumeration of all the letter grades one can get.
+</p>
+
+<p>
+<tt>InvalidGradeException</tt> is a <i>checked</i> exception that should be thrown if
+something that cannot become a valid grade is passed in where one is expected.
+</p>
+
+<p>
+The heart of the program lies in <tt>GradeManager</tt>. Uncomment the <tt>main</tt> 
+method. In Eclipse, you can do this by selecting the relevant lines and then 
+typing <b>CTRL /</b>
+(or clicking <b>Source->Toggle Comment</b> in the menubar) to comment/uncomment the 
+selected lines.</p>
+
+<p><tt>GradeManager</tt>'s main method starts a loop
+that reads in input from <tt>System.in</tt> and does some action corresponding to that input.
+You can access <tt>System.in</tt> through the Console tab in Eclipse. (In the Java perspective,
+this tab is usually grouped with the Problems, Javadoc, and Declaration tabs below the code window.)
+</p>
+
+<p><b>Question:</b> What is the difference between checked and unchecked exceptions?</p>
+
+<p><b>Exercise:</b> Fix and finish implementing <tt>GradeManager.main</tt>. You should use a
+<a href="http://java.sun.com/docs/books/tutorial/essential/exceptions/try.html">try/catch block</a>.</p>
+
+<p><b>Exercise:</b> Implement <tt>GradeManager.addGrade</tt>. Do this <i>without</i>
+using a try/catch block.</p>
+
+<p><b>Question:</b> Currently <tt>GradeManager.printHistogram</tt> throws an exception
+but does not need to declare it in its method signature. Why not?</p>
+
+<p><b>Exercise:</b> Finish implementing <tt>GradeManager</tt>. Run it as a Java Application
+to see it at work.</p>
+
+<p><b>Optional Exercise:</b> Write some JUnit tests for <tt>GradeManager</tt>.</p>
+
+<p><b>Optional Exercise:</b> Add the capability for <tt>GradeManager</tt> to load and save grades.</p>
+
+<h2> Commit Your Solutions </h2>
+
+<p>This is the end of the lab.  Be sure to commit your solutions to your personal directory in the Subversion repository, adding any files that you created.</p>
+
+</body>
+</html>

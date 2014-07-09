@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<HEAD>
+	<meta http-equiv=content-type content="text/html; charset=utf-8" />
+	<link rel=stylesheet href="main.css" type="text/css" />
+<title>Lab 0.1: Introductory Java</title>
+</HEAD>
+<BODY>
+
+<TABLE  CELLPADDING=0 BORDER=0 CELLSPACING=0 width=100%>
+
+<TR VALIGN=BOTTOM>
+<TD>
+<h1>6.005 Elements of Software Construction<br>
+Spring 2011<br>
+Lab 0.1: Introductory Java<br>
+</h1>
+
+<!--<p>
+<ul>
+  <li> <a href="#basicComputation">Basic Computation</a>
+</ul>
+</p>
+-->
+
+</TD>
+
+</tr></table>
+
+<p>This lab introduces you to some of the basic language features of Java, focusing on procedural programming: using variables, control structures, and procedures, and working with primitive data like numbers, strings, and arrays.  We assume that you have already seen these concepts in a previous course (possibly using Python or Scheme), so we can focus on how each concept is implemented in Java instead.
+
+<p>This lab also introduces various tools you will use throughout the semester, including the Eclipse integrated development environment and Subversion source code control system.
+
+<p>The exercises in this lab involve answering some questions and writing some code. The questions require only very brief answers, so there's no need to create additional files. Just write the answers as comments in the code. 
+
+<h2><a name="prelab">Before the Lab Session</a></h2>
+
+<p>Before coming to the Friday lab session, you must do the following:
+
+<ol>
+<li> <b>Read the lab thoroughly.</b>  Read this lab handout, and read all the links marked <b>Required Reading</b>.  (Other links are provided as supplementary material for further reference or understanding; you don't need to read them in advance.)  You will not have enough time during the lab session to read <i>and</i> do the exercises, so do the reading first.
+
+
+<li> <b>Install the software you'll need on your laptop.</b>  You need to install three things for this lab:
+
+        <ul>
+                <li><b><a
+href="http://java.sun.com/javase/downloads/index.jsp">JDK 6</a></b>
+(for Windows or Linux; Mac users probably already have Java, if not, get it <a
+href="http://www.apple.com/support/downloads/javaformacosx105update1.html">here
+for 10.5</a>.  If you have a PowerPC or early Intel Mac or are running OS X 10.4, come talk to us).  From this web page, download "JDK 6 Update 21"; you don't need NetBeans or Java EE.
+                <li><b><a href="http://www.eclipse.org/downloads/">Eclipse 3.6</a></b>. Choose "Eclipse IDE for Java Developers", which will download a ZIP file.  Unpack the ZIP file, go inside the resulting folder, and run Eclipse.
+                <li><b><a href="http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA">Subclipse</a></b>. To install Subclipse, use Eclipse's Software Updates mechanism. The installation instructions on the Subclipse website are out of date, so follow <a href="subclipse.html">these</a> instructions instead.
+        </ul>
+Athena already has this software installed, so if you'll be using an Athena, you don't need to install anything.
+        
+</ol>
+
+<h2>Eclipse</h2>
+
+<p>
+The Eclipse integrated development environment (IDE) is a powerful, flexible, complicated, and occasionally frustrating set of tools for writing, modifying, and debugging programs. It is especially useful for working in Java.
+</p>
+
+<p>
+On Athena, Eclipse is in the <tt>eclipse-sdk</tt> locker; the command name is <tt>eclipse</tt>.
+</p>
+
+<p>
+When you run Eclipse, you will be prompted for a &quot;workspace,&quot; which is where Eclipse will store all the different projects you work on. On Athena, for example, the default location is a directory called <tt>workspace</tt> in your home directory. In addition to code, Eclipse stores its own &quot;metadata&quot; in hidden folders in the workspace. <b>You should not run more than one copy of Eclipse at the same time</b> with the same workspace, or the metadata will become corrupted.
+</p>
+
+<p>
+The first time you run Eclipse, it will show you a welcome screen. Click the button to go directly to the &quot;workbench&quot; and you're ready to begin. For some useful tips and troubleshooting information, you can look at the <a href="http://web.mit.edu/6.170/www/tools/eclipse_reference.html">6.170 Eclipse Reference</a>, but disregard the 6.170-specific notes there.
+</p>
+
+<h2>Subversion</h2>
+
+<p>
+In this exercise, you will learn about the Subversion version control system, and how to retrieve code from a Subversion repository using Eclipse.
+
+<p>
+O'Reilly publishes <i><a href="http://svnbook.red-bean.com/">Version Control with Subversion</a></i>, conveniently available online.   This book describes what <a href="http://en.wikipedia.org/wiki/Subversion_(software)">Subversion</a> (or SVN) is and how to use it:
+</p>
+<blockquote>
+<p>
+Subversion is a free/open-source version control system. That is, Subversion manages files and directories, and the changes made to them, over time. This allows you to recover older versions of your data, or examine the history of how your data changed. In this regard, many people think of a version control system as a sort of &quot;time machine&quot;.
+</p>
+
+<p>
+Subversion can operate across networks, which allows it to be used by people on different computers. At some level, the ability for various people to modify and manage the same set of data from their respective locations fosters collaboration. Progress can occur more quickly without a single conduit through which all modifications must occur. And because the work is versioned, you need not fear that quality is the trade-off for losing that conduit&mdash;if some incorrect change is made to the data, just undo that change. [<a href="http://svnbook.red-bean.com/en/1.4/svn.intro.whatis.html">What is Subversion?</a>]
+</p>
+</blockquote>
+
+<p>
+If you have used other version control software, such as CVS, many of the concepts and procedures of SVN will be familiar to you. If not, there are two important ideas to learn: <i>repositories</i> and <i>working copies</i>.
+</p>
+
+<h3>Repositories</h3>
+
+<blockquote>
+<p>
+Subversion is a centralized system for sharing information. At its core is a repository, which is a central store of data. The repository stores information in the form of a filesystem tree&mdash;a typical hierarchy of files and directories. Any number of clients connect to the repository, and then read or write to these files. By writing data, a client makes the information available to others; by reading data, the client receives information from others.
+</p>
+
+<p>
+[...] What makes the Subversion repository special is that it remembers every change ever written to it: every change to every file, and even changes to the directory tree itself, such as the addition, deletion, and rearrangement of files and directories.
+</p>
+
+<p>
+When a client reads data from the repository, it normally sees only the latest version of the filesystem tree. But the client also has the ability to view previous states of the filesystem. For example, a client can ask historical questions like, &quot;What did this directory contain last Wednesday?&quot; or &quot;Who was the last person to change this file, and what changes did he make?&quot; [<a href="http://svnbook.red-bean.com/en/1.4/svn.basic.repository.html">The Repository</a>]
+</p>
+</blockquote>
+
+Every SVN repository has a URL at which it can be accessed.
+
+<h3>Working Copies</h3>
+
+<p>
+In order to make changes to files in the repository, you must obtain (or &quot;check out&quot;) a copy of the current version of those files:
+</p>
+
+<blockquote>
+<p>
+[... E]ach user's client contacts the project repository and creates a personal working copy&mdash;a local reflection of the repository's files and directories. Users then work simultaneously and independently, modifying their private copies. Finally, the private copies are merged together into a new, final version. [<a href="http://svnbook.red-bean.com/en/1.4/svn.basic.vsn-models.html">Versioning Models</a>]
+<p>
+</blockquote>
+
+<p>
+Any number of people can have any number of working copies (or &quot;checkouts&quot;) of different parts of a single SVN repository. Those working copies might be on different machines and have different versions of files.
+</p>
+
+<h2>SVN in 6.005</h2>
+
+<p>
+In 6.005 you will be using a Subversion repository.  The repository is located at https://svn.csail.mit.edu/6.005/sp11.
+You can also access it from any web browser and see the latest version of any file in the repository&mdash;great for quickly bringing up an example you're looking for.
+This repository contains access-controlled folders for every assignment and example code presented in lecture.  
+<ul>
+	<li>
+		The &quot;<b>published</b>&quot; folder will contain example code presented in lecture. This folder can be accessed by anyone in the class under <b>/published/</b>.
+	</li>
+</ul><br/><ul>
+	<li>
+		You will have your own <b>personal directory</b>, accessible only to you, for use in the labs, explorations, problem sets.  These are found in the <b>/users/<i>your_username</i>/</b> directory.
+	</li>
+</ul><br/><ul>
+	<li>
+		You will have a <b>group directory</b> for each project you work on during the course, found under <b>/groups/<i>project_name</i>/<i>student-student2-student3</i>/</b>.
+	</li>
+</ul>
+</p>
+
+<h3>Setup</h3>
+
+<p>
+To setup your SVN folders and password, visit <b><a href="https://courses.csail.mit.edu/6.005/svnadmin/">https://courses.csail.mit.edu/6.005/svnadmin/</a></b>.  You must have <a href="http://ist.mit.edu/services/certificates">certificates</a> installed.
+You only need certificates to access this administration page, however.  Any other resource is accessed with your Athena username and your new SVN password.
+First, set your SVN password on the SVN admin page.  Next, create your personal directory by clicking on the appropriate button and pull in the <tt>procedural_java</tt> assignment.  That's it!
+</p>
+
+<h2>SVN in Eclipse</h2>
+
+<p>
+Eclipse has built-in support for working with version control systems, but does not include specific support for SVN. <a href="http://subclipse.tigris.org/">Subclipse</a>, a plug-in for Eclipse, provides this support, allowing you to check out files from a repository, check them in, and use all the other features SVN provides. You can read the <a href="http://subclipse.tigris.org/documentation.html">Subclipse documentation</a>, also available inside the Eclipse help viewer, to learn more about the features of Subclipse.
+</p>
+
+<p>
+<b>On Windows and OS X</b>, there is one extra step you need to take to configure Subclipse. Go to the SVN preferences page (&quot;Window &rarr; Preferences... &rarr; Team &rarr; SVN&quot;) and under &quot;SVN interface,&quot; choose &quot;SVNKit (Pure Java).&quot; The &quot;JavaHL (<a href="http://en.wikipedia.org/wiki/Java_Native_Interface">JNI</a>)&quot; option will only work if you have a command line Subversion client installed in your <tt>$PATH</tt>.
+</p>
+
+<h3>Connecting to Repositories</h3>
+
+<p>
+Working with Subclipse begins in the &quot;<a href="http://agile.csc.ncsu.edu/SEMaterials/tutorials/subclipse/index.html#section3_0">SVN Repository Exploring</a>&quot; <a href="http://help.eclipse.org/help32/topic/org.eclipse.platform.doc.user/concepts/concepts-4.htm">perspective</a> (a perspective in Eclipse is a particular set and arrangement of interface panels). After you install Subclipse and restart Eclipse, switch to this perspective by following their instructions.
+</p>
+
+<p>
+Follow the Subclipse documentation for <a href="http://agile.csc.ncsu.edu/SEMaterials/tutorials/subclipse/index.html#section4_0">Creating a New Repository Location</a>, with the URL:</p>
+The url for the repository is: <b>https://svn.csail.mit.edu/6.005/sp11</b>.
+</p>
+
+<p>
+Note that to enter the &quot;SVN Repository View&quot; you should click the &quot;Open Perspective&quot; button in the upper right corner of the Eclipse window (it is a small window icon with a plus) and select the &quot;Other...&quot; option.  You'll be presented with a dialog listing a number of perspectives, including &quot;SVN Repository Exploring&quot;, the view you want.
+</p>
+
+<p>
+In order to add the repository, you should click on the Add SVN Repository button shown below.
+<div style="text-align: center">
+<a href="new-repo.png"><img src="new-repo.png"></a>
+</div>
+</p>
+
+<h3>Checking Out Projects</h3>
+
+<p>
+Checking out a project from the repository once you've added it is straightforward, if that project was originally created in Eclipse. Right now, we'll check out the code for today's lab. You may be asking: where did this code come from, if it's in my personal directory!? And even if you weren't asking, you should still know that the SVN admin site added the necessary code for you.
+</p>
+
+<p>
+Navigate to the <tt>procedural_java</tt> folder in your directory, right click it, and select &quot;Checkout...&quot; (the documentation on this is under <a href="http://agile.csc.ncsu.edu/SEMaterials/tutorials/subclipse/index.html#section6_0">Checking out a Project</a>). You should accept the name of the project unchanged, for this and all labs and all group projects.
+</p>
+
+<p>
+If Eclipse does not prompt you, switch to the Java perspective with the menu in the top right of the workbench window.
+</p>
+
+<br/>
+
+<div class="boxed">
+<img src="check.gif" width="16" height="16"/><b>Self-Checkpoint.</b> You should now
+be in the Java perspective with the <tt>procedural_java</tt> project checked
+out and ready to work on.
+</div>
+
+<h2><a name="basicComputation">Basic Computation</a></h2>
+
+<p><b>Required Reading</b> (from the <a href="http://java.sun.com/docs/books/tutorial/">Java Tutorial</a>):
+<ul>
+<li><a href="http://java.sun.com/docs/books/tutorial/getStarted/application/index.html">Hello World!</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/datatypes.html">Primitive Data Types</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/op1.html">Assignment/Arithmetic Ops</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/op2.html">Equality/Relational/Conditional Ops</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/data/beyondmath.html">Math class</a>
+
+<li><A href="http://java.sun.com/docs/books/tutorial/java/javaOO/methods.html">Defining methods</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/javaOO/arguments.html">Calling methods</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/javaOO/returnvalue.html">Returning a value from a method</a>
+
+</ul>
+
+<p>Look at the code below which calculates the value of investing an
+initial sum of money at a specified interest rate and for a specified
+number of years.  Open the source file <tt>FinancialCalc.java</tt> (which you'll find inside the folder "(default package)" in Eclipse).
+
+<blockquote>
+<pre>
+class FinancialCalc {
+
+  public static void main(String[] args) {
+    double principal = 1000.00;    // $1000 initial investment
+
+    double interestRate = 0.035;   // 3.5% interest rate
+    int numOfYears = 7;            // investment length is 7 years
+    
+    double finalValue = 0.0;
+    finalValue = principal * Math.pow((1 + interestRate), numOfYears);
+    
+    System.out.println("Investing $" + principal + 
+                       " at an interest rate of " + (interestRate*100) + "%" +
+                       " for " + numOfYears + " years" +
+                       " will have a final worth of $" + finalValue);
+  }
+  
+}
+</pre>
+</blockquote>
+
+<p><b>Run the code in Eclipse to see what it does.</b> Use Run &rarr; Run As... &rarr; Java Application, and look for the output in the Console pane at the bottom of the screen.
+
+<p><b>Change the program</b> so that it calculates the final value in a separate method <tt>computeFinalValue</tt>, which should be a function of three arguments (the principal, interest rate, and number of years).
+
+<blockquote>
+<pre>
+  static double computeFinalValue (double principal, double interestRate, int numOfYears) {
+    /* YOUR CODE HERE */
+  }
+</pre>
+</blockquote>
+
+<p>Your <tt>main</tt> method should still print the same result on the output.
+
+<p>In general, the final value (<b><i>V</i></b>) of an
+investment (principal <b><i>P</i></b>) compounded yearly for <b><i>Y</i></b>
+years at interest rate <b><i>I</i></b> is given by the formula:
+<blockquote>
+<i>V = P (1 + I)<sup>Y</sup></i>
+</blockquote>
+
+<p>Given any three of these variables, you can write code that computes the fourth.  <b>Write methods that compute each of the variables</b> (<i>P</i>, <i>I</i>, and <i>Y</i>) when given values for the other three, and demonstrate by having your <tt>main</tt> method print the following:
+<ol>
+<li>The amount of money you should invest today (at an interest rate of 5%)
+to have a total amount of $1000.00 at the end of 4 years.</li>
+
+<li>The interest rate you need to turn an initial investment of $500.00
+into $525.00 at the end of 3 years (<i>hint: be careful when carrying
+out division on integers!  Cast the integer to a double when
+necessary</i>).</li>
+
+<li>The number of years you need to invest an initial sum of $100.00
+at an interest rate of 4.4% to have a final value of $150.00 (<i>hint:
+the number of years is not necessarily an integer</i>).</li>
+</ol>
+
+
+<h2>Checking In Changes to Subversion</h2>
+
+<p>Now that you've changed some code and tested your changes, let's save the changes back to your personal Subversion directory.  This process is also known as "committing" or "checking in".
+
+<p>
+<b>You should always remember to commit your changes to the repository at the end of lab.</b>   In fact, it's not a bad idea to commit after every exercise, as soon as you're happy with the code you've written.  When you're working on a team, you'll need to commit your code regularly&mdash;until you commit, no one else sees the changes you've made. It is, however, not a good idea to commit code that prevents the program from compiling or that makes it less stable. This is called &quot;breaking the build&quot; as it is a major developer <i>faux pas</i>.
+</p>
+
+<p><b>You should also remember to commit your projects by the deadline</b>. Where other courses ask you to &quot;hand in&quot; your assignments,  in 6.005 you will submit all your assignments by checking them into Subversion.
+</p>
+
+<p>
+Before checking in changes, it is always good practice to review what you've done. Right-click on the <tt>procedural_java</tt> folder that holds your work for this lab, and select &quot;Team &rarr; Synchronize with Repository.&quot; Eclipse will prompt you to open yet a new perspective that shows how your local working copy compares with the repository (see <a href="http://agile.csc.ncsu.edu/SEMaterials/tutorials/subclipse/index.html#section7_0">Team Synchronizing</a> for more explanation). Grey right-facing arrows indicate files you've modified that need checking in.
+</p>
+
+<p>
+Right-click the file you changed and select &quot;Open in Compare Editor&quot; to see a detailed differences, or &quot;diff,&quot; view that shows exactly what has been changed. Supposing you're satisfied that this is a change you want to check in, right click the project and select &quot;Commit...&quot; if you're in the Team Synchronizing perspective, or &quot;Team &rarr; Commit...&quot; from any other. Read the <a href="http://agile.csc.ncsu.edu/SEMaterials/tutorials/subclipse/index.html#section8_0">documentation for the Commit dialog box</a>, where you should:
+<ul>
+	<li>Write a message that describes your commit, and</li>
+	<li>Make sure the set of files to be checked in is what you want&mdash;for example, don't commit Java class files, just source files.</li>
+</ul>
+</p>
+
+<p>
+If all goes well, your changes should be committed to the repository. If you have any doubt about anything you've done up until now, or don't feel confident that your updated code was committed correctly, ask the staff. Otherwise&mdash;on with Java!
+</p>
+
+<h2> Control Flow </h2>
+
+<p><b>Required Reading</b> (from the <a href="http://java.sun.com/docs/books/tutorial/">Java Tutorial</a>):
+<ul>
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/expressions.html">Expressions, Statements, Blocks</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/if.html">If-then statements</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/switch.html">Switch statements</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/while.html">While, do-while statements</a>
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/for.html">For statements</a>
+
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/branch.html">Break/continue</a>
+
+</ul>
+
+<p>
+Look at the method below which finds prime numbers, which is found in Eclipse in the source file <tt>Primes.java</tt>.
+
+<blockquote>
+<pre>    static int findPrimes(int n, boolean printPrimes) {
+        boolean isPrime = true;
+        int numPrimes = 0;
+
+        for (int i = 2; i &lt;= n; i++) {
+            isPrime = true;
+
+            for (int j = 2; j &lt; i; j++) {
+                if (i % j == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if (isPrime) {
+                ++numPrimes;
+                if (printPrimes)
+                    System.out.println(i);
+            }
+        }
+        return numPrimes;
+    }
+</pre>
+</blockquote>
+
+<p><b>Run the code and observe its behavior.</b>  What does the variable <tt>numPrimes</tt> compute?  What does the argument <tt>printPrimes</tt> mean?
+
+<p><b>Implement the new method <tt>findPrimesFaster</tt></b> by copying code from the <tt>findPrimes</tt> method and modifying it
+to have the following features:
+<ul>
+<li> Uses labeled <tt>continue</tt> instead of <tt>break</tt>.</li>
+
+<li> Does not require the <tt>isPrime</tt> variable.</li>
+
+<li>Only tries to divide by integers up to the square root of the number being tested.</li>
+</ul>
+
+<p>
+<b>Check the output of <tt>findPrimesFaster</tt> carefully.</b>  It should produce the same results as <tt>findPrimes</tt>. How would you do this check mechanically? 
+
+<h2>Arrays</h2>
+
+<p>
+<b>Required Reading</b> (from the <a href="http://java.sun.com/docs/books/tutorial/">Java Tutorial</a>):
+<ul>
+<li><a href="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/arrays.html">Arrays</a>
+</ul>
+
+<p>In this problem you will make an even faster prime finder based on the following observation: when testing whether an integer is prime, it is sufficient to try
+and divide by the list of prime numbers up to the square root of the
+number being tested.  For example, if the method has already
+discovered the prime numbers 2, 3, 5, 7, 11, and 13, and we are
+testing whether the integer 17 is prime, it is sufficient to try and
+divide the integer 17 by the prime numbers 2 and 3.</li>
+
+<p><b>Implement the method <tt>findPrimesEvenFaster</tt></b> using this observation.  Use an array to store the prime numbers that it has already found.</p>
+
+<p><b>Check your method's behavior carefully against the simpler versions of the prime finder.</b>  How much faster does it run?</p>
+
+<!--
+<p>
+<b>Optional:</b> If you preserve the list of primes that you have computed between calls to <tt>findPrimesEvenFaster</tt>, then you won't need to start from 2 in subsequent calls to <tt>findPrimesEvenFaster</tt>. This technique is called
+<em>memoization</em>.  You'll need to do two things to make memoization work.  First, the primes table needs to be declared as a <i>static</i> variable instead of a local variable.  Second, instead of using a primitive Java array, you should use the class <a href="http://java.sun.com/j2se/1.5/docs/api/java/util/ArrayList.html">ArrayList</a> instead.
+-->
+
+<br/>
+
+<div class="boxed">
+<img src="check.gif" width="16" height="16"/><b>Checkpoint.</b>  Find a TA or
+another member of the course staff and review your financial calculations and
+primes-finding methods.
+</div>
+
+<h2> Characters &amp; Strings </h2>
+
+<p><b>Required Reading</b> (from the <a href="http://java.sun.com/docs/books/tutorial/">Java Tutorial</a>):
+<ul>
+<li><a href="http://java.sun.com/docs/books/tutorial/java/data/characters.html">Characters</a>
+
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/data/strings.html">Strings</a>
+
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/data/converting.html">Converting between numbers &amp; strings</a>
+
+
+<li><a href="http://java.sun.com/docs/books/tutorial/java/data/manipstrings.html">Manipulating strings</a>
+
+
+
+</ul>
+
+<p>In this exercise, you will write several methods in the class <tt>Scrambler</tt>.  The documentation of the <a href="http://java.sun.com/javase/6/docs/api/java/lang/String.html">String</a> class in the Java API will be very useful.
+
+<p><b>Write the method <tt>reverse</tt></b>, which takes a string and returns its characters in reverse order.  For example, <tt>reverse("abc")</tt> should return <tt>"cba"</tt>.  One way to do this is by getting each character out of the string with its <tt>charAt()</tt> method and concatenating it onto the result string.
+
+<p><b>Write the method <tt>reverseWords</tt></b>, which takes a string and reverses the order of the words in the string without reversing the words themselves.  For the purpose of this problem, assume that the words in the string are separated by single spaces.  For example, <tt>reverseWords("go west!")</tt> should return <tt>"west! go"</tt>.  The <tt>split()</tt> method of String is an easy way to pull the string apart into words.
+
+<h2> Object Equality </h2>
+
+<p>Java actually has two ways to test whether two values are equal:
+<ul>
+<li>the <tt>==</tt> operator, which you have already seen and used with primitive data types.  For example, <tt>2+3 == 5</tt> is true.
+<li>the <tt>equals()</tt> method, which can be used on objects like Strings. For example, <tt>("2"+"3").equals("23")</tt> is true.
+</ul>
+
+<p>Confusion can arise because these two ways of testing for equality don't do the same thing.  For example, you'll find that even though it's true that <tt>"2"+"3".equals("23")</tt>, it may <i>not</i> be true that <tt>"2"+"3" == "23"</tt>.  This is because <tt>equals</tt> compares the contents of the objects, i.e., the actual sequences of characters, whereas <tt>==</tt> compares the identity of the objects, i.e., the locations where they are stored in memory.  Since the concatenation <tt>"2"+"3"</tt> may create a new string in memory, the <tt>==</tt> operator may consider it different from <tt>"23"</tt>.  
+
+<p><em>(In fact, it's even trickier than this, because sometimes the Java compiler will figure out how to make "2"+"3" and "23" share the same storage location, so "2"+"3"=="23" will be true.  But other times it won't be; for example, if <tt>String x="2"</tt> and <tt>String y="3"</tt>, then <tt>x+y == "23"</tt> is <i>not</i> true, at least not for the JDK 5.0 compiler we're using in this class.  If you can explain to the staff why the first case is == but the second case isn't, you'll get a cookie.)</em>
+
+<p>If you know Scheme, the distinction between <tt>==</tt> and <tt>equals</tt> is similar to <tt>eq</tt> vs. <tt>equal</tt>.  Python makes a similar distinction between the operators <tt>==</tt> and <tt>is</tt>.  But be careful -- <tt>==</tt> in Python compares object contents, whereas <tt>==</tt> in Java compares object identity.
+
+<p>We'll learn more about == vs. <tt>equals</tt> in future lectures.  For now, it's enough to follow this simple rule:
+
+<blockquote>
+<p><b>For primitive data (numbers and characters), always use the <tt>==</tt> operator.</b>  This is easy, because you actually <i>can't</i> use the <tt>equals()</tt> method on primitive types; you'll get an error message from Eclipse.
+<p><b>For objects (like Strings, URLs, etc.), use the <tt>equals</tt> method.</b>  That ensures that you're comparing the contents of the objects, and ignoring where they happen to be stored.
+</blockquote>
+
+<p>Using this rule, <b>write the method <tt>isWordPalindrome</tt></b>, which takes a string and tests whether it is a word-level palindrome (consisting of the same sequence of words backwards and forwards).  For example, <tt>"fall leaves when leaves fall")</tt> is a word palindrome, but not an ordinary palindrome.
+
+
+
+<h2> Exceptions </h2>
+
+<p>You may have noticed after you implemented <tt>isWordPalindrome()</tt> that your program output now ends with an error message, which may look something like this:
+<blockquote>
+<pre>Exception in thread "main" java.lang.NullPointerException
+	at Scrambler.reverseWords(Scrambler.java:10)
+	at Scrambler.isWordPalindrome(Scrambler.java:20)
+	at Scrambler.main(Scrambler.java:69)
+</pre>
+</blockquote>
+
+<p>This message is an <i>exception</i>.  Java uses <i>exceptions</i> to handle any abnormal condition, including errors,
+generated during the program's execution.  The error message you see in the output includes a <i>stack trace</i> which shows the methods that called the code that generated the error.  <b>Click on each of the links in the stack trace</b> to understand how the program reached the line that eventually caused the error.
+
+<p>We will learn more about exceptions in a later lecture, but here are some exceptions that you are likely to encounter when you're debugging your code.</p>
+<ul>
+<li><tt>NullPointerException</tt> &mdash; Thrown when an application
+attempts to use <tt>null</tt> in a
+case where an object is required.  Typically, you are trying to
+call a method on a variable which you have forgotten to initialize.</li>
+<li><tt>IndexOutOfBoundsException</tt> &mdash; Thrown to indicate that an
+index of some sort (such as to an array, to a string, or to a vector) is
+out of range (see also ArrayIndexOutOfBoundsException and
+StringIndexOutOfBoundsException). 
+This happens when you try to access an element that is not there
+(for example, if you have an array with 10 elements, and you try to
+access the 12<sup>th</sup>, you will get an ArrayIndexOutOfBoundException
+at runtime).  Bear in mind that Java lists are numbered from 0, so
+a 10-element list has elements at indices 0 through 9 but not 10.</li>
+<li><tt>ClassNotFoundException</tt> &mdash; Thrown when an application tries to load in a class but no definition for the
+class with the specified name could be found.  Any number of things can cause this, but
+first check for spelling mistakes and mistakes on the input signatures and
+output types of your code.
+</li>
+</ul>
+
+<p><b>Fix your code</b> by making each function you've written return a reasonable result when it is passed <tt>null</tt> as an argument. You will find that you can't call <tt>equals()</tt> on a <tt>null</tt> value, which requires us (already) to amend our rule about equality testing: 
+
+<blockquote>
+<p><b>For comparing primitive data types, always use the <tt>==</tt> operator.</b> 
+<p><b>For comparing two objects, use the <tt>equals</tt> method.</b>
+<p><b>For comparing an object reference against <tt>null</tt>, use the <tt>==</tt> operator.</b>
+</blockquote>
+
+<br/>
+
+<div class="boxed">
+<img src="check.gif" width="16" height="16"/><b>Checkpoint.</b>  Find a TA or
+another member of the course staff and review your work on <tt>Scrambler</tt>.
+</div>
+
+<h2> Commit Your Solutions </h2>
+
+<p>This is the end of the lab.  Commit your solutions to your personal Subversion directory, as described above under Checking In Changes to Subversion.
+
+<!--
+<h2> Comments </h2>
+
+<h3>Readings</h3>
+
+Comments section from 6.170 R1, cleaned up a bit
+http://www.mit.edu/~6.170/recitations/recitation1.html
+
+<p>
+some kind of very simple Javadoc tutorial
+
+<h3>Exercises</h3>
+
+Write documentation for a procedure and generate it with Eclipse
+-->
+
+  
+</body>
+</html>

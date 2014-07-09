@@ -1,0 +1,108 @@
+Playing 100 games between Jasper and the reference player...
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+Opponent threw a game error.
+Opponent threw a game error.
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+Opponent threw a game error.
+We won!
+Opponent threw a game error.
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+Opponent threw a game error.
+We won!
+Opponent threw a game error.
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+Opponent threw a game error.
+We won!
+We won!
+We won!
+We won!
+We won!
+We won!
+Done.
+
+Results:
+A won 76 times.
+B won 0 times.
+A threw 0 errors.
+B threw 24 errors.

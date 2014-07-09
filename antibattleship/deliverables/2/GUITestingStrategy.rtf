@@ -1,0 +1,26 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww9660\viewh14900\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 GUI Testing Strategy:\
+\
+While it is impossible to test every possible input to our GUI, we will aim for comprehensive coverage of possible scenarios that could arise and will ensure to test the common case as well as all possible edges cases.\
+\
+Common case: Our most basic testing will involve playing many games of Antibattleship using our GUI paying particular attention to what is happening to ensure all is working as expected.  Since we have three different modes (play the computer, host a network game, and connect to a network game), we will make sure to play games in all three.\
+\
+To test our edge cases we will make sure to cover all possible edge cases. \
+\
+To ensure that our GUI is handling illegal inputs correctly, we will try putting valid inputs in all but one field on each screen and then putting an invalid input into the remaining screen.  To check that it is handling all invalid inputs correctly, we will test the following possible inputs for all textbooks that take a positive Integer: 1) A letter or other character that is not numerical, 2) A negative number, 3) Zero, 4) One (in some cases this will also be invalid), 5) A standards input (i.e. a number in the range of 2-10), and 6) a really large input that would overflow the Integer field.  \
+\
+Additionally, we will make sure that it is not possible to enter an invalid board.  To test this, we will try entering a board that is too short on all sides to fit the longest ship.  We will also try to enter a board that is large enough to fit the longest ship, but where the other dimension is not two times the number of ships.  As part of this test, we will make sure that the dimension that is long enough to fit the largest ship is also two time the number of ships to make sure that our code is checking that the two conditions are meet by different dimensions.  We will then try entering a board that is exactly the minimum size allowed to ensure that it returns true at the edge.  Finally, we will test a board that is valid and not close to being invalid.\
+\
+To ensure that all of our buttons are working correctly, we will make sure to play games that utilize all of them.  For instance, in the initiate game phase, the user has the option of adding ships and then clearing them and then re-adding them.  We will make sure to test this and will test that our game still recognizes invalid inputs if a valid input is entered and then cleared or vis versa.  \
+\
+In the place ships screen, in addition to testing all of the buttons and textfields as described above, we will also try to place ships in invalid ways and see if the game catches it.  For instance, we will try places ships adjacent and on top of each other and will make sure to test the case where ships are diagonally adjacent.  We will try submitting our ships before they are all placed on the board as well to ensure that the game does not allow this.  Finally, we will try placing all ships on the board and then reseting them and make sure that the checks still work and that the submit butting does not work if the ships are no longer on the board.  We will also make sure that ships can be placed vertically and horizontally and will test many random combinations of valid inputs to ensure that all valid placements of ship are allowed.  To make sure the edge case is working, we will try placing ships that are only one square off from being invalid and make sure that the game accepts them.  \
+\
+To test the game playing screen, we will make sure that all buttons are working and will ensure that we play games where both the user using the GUI wins and the AI bot wins to make sure that the ending of the game for both possible cases is covered.  Finally, we will check that the GUI returns to the main menu after a game is played and that we can then initiate a new game and play it all the way through without problems.\
+\
+We believe that while this strategy does not cover every possible input (which is impossible) it allows us to be confident that our GUI is fully functional.\
+}

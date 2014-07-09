@@ -1,0 +1,14 @@
+
+public class TestCalculator {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{
+		Calculator myCalc = new Calculator();
+		int result = myCalc.Add(123, 456);
+		System.out.println(String.format("Result: %1s. %1s", result, "Yay!!"));
+	}
+
+}

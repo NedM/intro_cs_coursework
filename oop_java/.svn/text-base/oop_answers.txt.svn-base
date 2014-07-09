@@ -1,0 +1,34 @@
+Light it up:
+1. To rename the class Light to ShinyLight I would change the following lines
+Class declaration => public class Light {} --> public class ShinyLight {}
+Constructors => public Light(){} --> public ShinyLight(){}
+                public Light(boolean){} --> ShinyLight(boolean){}
+                
+2. Currently the field isOn is declared like this: private static boolean isOn; if it were changed to 
+private static final boolean isOn; it would be immutable after construction. Once the constructor was called, the isOn 
+field would effectively be read only.
+
+3. When Light() is called, it calls the other constructor passing the default value, false. So when Light() is called
+a light object gets created and the isOn value is set to false.
+
+4. Static methods cannot access non-static fields because non-static fields are properties of an object/instance of the class.
+Static methods and members belong to the class itself while non-static methods and members belong to the instance.
+in the case of statics, there is only one value for the class.
+
+5. If the argumentless constructor, Light(), did not exist, ColoredLight(Color color) would have to make an assumption for the default
+value of isOn when calling the super() constructor. 
+i.e. ColoredLight(Color color){ 
+boolean default = true; 
+super(default); 
+this.lightColor = color; 
+}
+
+6. An interface is a contract that classes may implement. Classes are specific implementations that produce objects. Interfaces define which public methods must 
+exposed in a class that implements the interface.
+
+7. Class inheritance adheres to the "is a" pattern while interfaces adhere to the "implements a" pattern. A classic example involves animals.
+A cat and a bear are both subclasses of the base animal class and they both may implement a Speak() method from the ISpeak interface. In the case of the cat,
+the result of speak() might be "meow" and in the case of bear it might be "raaarrrgh!!"
+
+
+

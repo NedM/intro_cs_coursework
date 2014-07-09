@@ -1,0 +1,8 @@
+Exceptions_Answers.txt
+
+1. Checked exceptions may be caught and handled appropriately. They may signify special state instead of catastrophic failure.
+Unchecked exceptions cause the program to crash and exit. They are not handled and no processing may occur when one is thrown.
+
+2. GradeManager.printHistogram doesn't need a "throws" indicator in its signature because it is throwing a RuntimeException which is
+an unchecked type. It cannot be caught or handled.
+

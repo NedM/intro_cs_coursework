@@ -1,0 +1,1493 @@
+gsave
+1.5 setlinewidth
+/savematrix matrix defaultmatrix def
+newpath
+59.999999999999986 49.999999999999986 translate
+0.8 0.9 scale
+gsave
+1.5 setlinewidth
+/savematrix matrix defaultmatrix def
+newpath
+210.0 -2000.0 translate
+0.3 5.0 scale
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+179.99999999999997 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+199.99999999999997 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+219.99999999999997 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+239.99999999999997 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+179.99999999999997 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+199.99999999999997 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+219.99999999999997 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+239.99999999999997 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+179.99999999999997 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+199.99999999999997 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+219.99999999999997 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+239.99999999999997 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+179.99999999999997 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+199.99999999999997 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+219.99999999999997 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+239.99999999999997 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+179.99999999999997 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+199.99999999999997 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+219.99999999999997 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+239.99999999999997 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+179.99999999999997 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+199.99999999999997 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+219.99999999999997 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+239.99999999999997 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+260.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+280.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+300.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+320.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+260.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+280.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+300.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+320.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+260.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+280.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+300.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+320.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+260.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+280.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+300.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+320.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+260.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+280.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+300.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+320.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+260.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+280.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+300.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+320.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+340.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+360.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+380.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+400.0 440.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+340.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+360.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+380.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+400.0 460.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+340.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+360.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+380.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+400.0 480.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+340.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+360.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+380.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+400.0 500.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+340.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+360.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+380.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+400.0 520.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+gsave
+gsave
+1.5 setlinewidth
+newpath
+340.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+360.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+380.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+gsave
+gsave
+1.5 setlinewidth
+newpath
+400.0 540.0 moveto
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+20.0 0.0 rlineto
+90.0 rotate
+closepath
+savematrix setmatrix
+savematrix setmatrix
+stroke
+grestore
+grestore
+grestore
+grestore
+grestore
+grestore
+grestore
+closepath
+grestore
+closepath
+grestore
+

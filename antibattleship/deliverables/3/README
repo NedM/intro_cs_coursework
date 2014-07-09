@@ -1,0 +1,14 @@
+README
+
+To run our GUI, please run the main method of the LaunchGUI class in the test package (src/test/).
+ 
+To play 100 games between our AI and the ref player (where our AI is initiating), run the main method of the TestJasperVsRef class in the same package.
+
+Finally, to play a game between our AI and another player (whether our AI is initiating or receiving), run the main method of the TournamentMain class.
+Note that you must provide arguments to this method, as used in the tournament and as explained on Stellar.
+
+To run our ABSMessage component tests, run ABSTest.java in the Test package as a JUnit test class
+
+No other part of our code has a main method, but feel free to look around!
+
+-jboortz, nedmurp, jven

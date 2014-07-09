@@ -1,0 +1,14 @@
+package collab;
+
+/**
+ * Sample class for lab 1
+ * 
+ */
+public class Liv {
+
+	@Override
+	public String toString() {
+		return "I can't think of anything to say"
+	}
+	
+}

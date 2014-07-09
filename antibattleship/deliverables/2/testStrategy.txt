@@ -1,0 +1,18 @@
+Test Strategy for AntiBattleship Program
+    Our plan for testing the AntiBattleship program centers on using pre-generated game states stored in xml files. We plan to create methods that will read
+in these xml files and set up the internal game state then execute an action, serialize the game state back to xml and compare it against a previously
+generated file.
+    With this plan, we should be able to simulate the following board states: initialize game, board unmarked, board fully marked, waiting for player input, 
+waiting for opponent input, end game. Once we have set up the game state, we should be able to trigger actions within the game and verify the correct state 
+occurred. Most actions should not result in any state transition (negative test cases) but a few will result in a predictable state transition. These new 
+states will be stored in xml files and compared against expected values.
+
+-nedmurp
+
+     We will also play multiple games with our bot and the reference player to make sure the basic functionality works as expected, and also that the 'common'
+     user input mistakes do not break anything. This will be done with both a combination of just passing raw strings to our AI with telnet, and also using our
+     GUI to play vs our AI and the ref player.
+     
+     -jven 
+     
+     

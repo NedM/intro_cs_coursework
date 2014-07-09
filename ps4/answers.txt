@@ -1,0 +1,152 @@
+Spring 2011 6.005 Problem Set 4
+
+- Please answer the questions in the given blanks.
+- Do NOT try to draw ASCII art diagrams; use English text or code
+- Your answer can span multiple lines
+
+1.A.i !<
+listShape.add(new Object()); would not compile because Object is not a subclass of shape so the type check would fail at compile time
+>!
+
+1.A.ii !<
+listObject.add(listShape); would succeed because listObject can accept any type that is a subclass of Java.Object (which is everything).
+>!
+
+1.A.iii !<
+listWildcard.add(new Object()); would not compile because you cannot do a .add() operation on a list with unknown type unless the target of the add operation is null.
+>!
+
+1.A.iv !<
+listWildcard.addAll(listObject); would not compile because the type of elements in listWildcard is unknown and only types which are subtypes of element type maybe added. Since we don't know the type, only null may be added and listObject is not null.
+>!
+
+1.A.v !<
+listObject.addAll(listWildcard); would succeed because listObj.addAll() takes a collection<? extends Object> and listWildcard satisfies that requirement as every type is a subtype of Java.Object
+>!
+
+1.A.vi !<
+listObject.add(listWildcard.get(0)); will succeed because we know that the result of listWildcard.get(), whatever it may be, will always be a subtype of Object.
+>!
+
+1.A.vii !<
+listShape = listObject; will not compile because an assignment expression requires that both objects be the same type and List<Shape> is not the same type as List<Object>.
+>!
+
+1.A.viii !<
+listObject = listShape; will not compile because an assignment expression requires that both objects be the same type and List<Shape> is not the same type as List<Object>.
+>!
+
+1.A.ix !<
+listWildcard = listShape; will succeed because listWildcard's type is unknown so it can be set equal to a type of List<Shape> at compile time. Errors may be encountered at runtime.
+>!
+
+1.B !<
+The value returned is true because equality for lists of objects is defined as having the same contents in the same order. Since neither list has any contents, they are deemed equal.
+>!
+
+2.A !<
+public <T extends Receiver<M, V>, M, V> T makeNewReceiver(Class<T> r) throws InstantiationException, IllegalAccessException
+    {
+        return r.newInstance();
+    }
+>!
+
+2.B !<
+public <T extends Receiver<M, V>, M extends T, V extends M> T makeNewChainedReceiver(M message, T r1, T r2) throws InstantiationException, IllegalAccessException
+    {
+        return r2.receive(r1.receive(message));     
+    }
+>!
+
+3.A !<
+The .equals method in Java.Object returns true if the two objects being compared are in fact the same object. Whether two objects are the same is determined by comparing memory addresses. In the case provided
+We would prefer to base equality on the information available to the Customer class, namely the name and address of the customer. This way we could compare customer records to find duplicates or create a lit of customers based on
+the customer's name and address.
+>!
+
+3.B.i !<
+Yes. In any equality test it makes sense to return true if the object being compared is the same as the object doing the comparing. The contract for equals states that the equivalence relation must be reflexive (A = A is true)
+>!
+
+3.B.ii !<
+Yes. The contract for Equals states that the equivalence relation must be symetric which means that if a = b, then b = a. If a is not null, it may be possible for us to think of a situation where a = null is acceptable
+but it will never be acceptable for null = a.
+>!
+
+3.B.iii !<
+Yes. Though this is a very poor method of generating a hash code, it does meet the requirement that it produces the same result for two objects that have been deemed equal.
+>!
+
+3.B.iv !<
+No. The contract states that the equality result must be consistent provided no modifications are made to the object. Mutable object may be equal at time t1 but mutated at t2 so that they are no longer equal at t3 (where t1 < t2 < t3).
+>!
+
+3.B.v !<
+Yes. The contract for hash code specifies that if two objects are considered equal, they must have the same hash code.
+>!
+
+3.B.vi !<
+No. ClassA may calculate equality differently than ClassB. Let us say that ClassB has the fields Name, Address, and Phone number while ClassA has just Name and Address. For ClassA, equality may compare the name and address whereas 
+ClassB includes phone number in the equality definition. For a.Equals((ClassA)b); a is of type ClassB and b has been downcast to ClassA thus loosing access to the phone number member which may cause it to fail the equality comparison. 
+>!
+
+3.B.vii !<
+True. (Hedge: I'm not comfortable with saying there is "never" a good reason but cannot think of a counter example so...)
+>!
+
+3.C !<
+In the first print statement, m.contains(c) will print as true. In the second, m.contains(c) will be false. This is because the object c was mutated and the current c is no longer equal to the c that was added to the hash table. Java puts the burden of writing 
+good hash code methods on the developer because all possible definitions of equality could not have been accounted for when building hash tables.
+>!
+
+3.D !<
+Explanation: 
+    A set cannot contain itself because this breaks the equality comparison. If A is a set that contains A and the definition for equality of collections (of which set is a member) is that each element in the collection must equal each element in the 
+    collection to which it is being compared, the equality comparison fails because of recursion. A.Equals(B) implies that A.get(0) == B.get(0) but A.get(0) is A.
+Code snippet:
+public void TestSet()
+    {
+        Set<Set> setOfSets = new HashSet<Set>();
+        Set<Set> s = setOfSets;
+        setOfSets.add(new HashSet<String>());
+        System.out.println("setOfSets count: " + setOfSets.size());
+        System.out.println("setOfSets contains s: " + setOfSets.contains(s));
+        setOfSets.add(s);
+        System.out.println("setOfSets count: " + setOfSets.size());
+        System.out.println("setOfSets contains s: " + setOfSets.contains(s));
+        setOfSets.add(setOfSets);
+        System.out.println("setOfSets count: " + setOfSets.size());
+        System.out.println("setOfSets contains s: " + setOfSets.contains(s));       
+    }
+    
+Output:
+ setOfSets count: 1
+ setOfSets contains s: false
+ setOfSets count: 2
+ Exception in thread "main" java.lang.StackOverflowError
+    at java.util.HashMap$KeyIterator.<init>(Unknown Source)
+    at java.util.HashMap$KeyIterator.<init>(Unknown Source)
+    at java.util.HashMap.newKeyIterator(Unknown Source)
+    at java.util.HashMap$KeySet.iterator(Unknown Source)
+    at java.util.HashSet.iterator(Unknown Source)
+    at java.util.AbstractSet.hashCode(Unknown Source)
+    at java.util.AbstractSet.hashCode(Unknown Source)
+    at java.util.AbstractSet.hashCode(Unknown Source)
+    at java.util.AbstractSet.hashCode(Unknown Source)
+    at java.util.AbstractSet.hashCode(Unknown Source)
+>!
+
+4 !<
+Given a tree where A is a child of the root, B is a child of A and C is a child of B. [Root -> A -> B -> C]
+Thread 1 attempts to run A.addChildOnly(B) and acquires a lock on A just as thread 2 attempts to run B.setParentOnly(A) acquires a lock on B.
+Thread 1 will be stuck waiting for thread 2 to release the lock on B while thread 2 will be stuck waiting for thread 1 to release the lock on A. Deadlock!
+To resolve this deadlock, we should implement a synchronized message loop which both threads may post to a get from. This way, thread 1 could post the A.addChildOnly() call on the message stack
+either before or after thread 2 posted the B.setParentOnly() call. A third thread (thread 3) could get from the stack and maintain the tree, discarding invalid add and set commands. Or thread 1 and thread 2 could perform
+a get command each before attempting to modify the tree. Another method of resolving this deadlock could be to assign some value to the node from which a method was called. Node's higher in the tree structure would have lower values and would acquire the locks sooner
+than nodes farther from the root.
+
+Example using the synchronized message loop:
+Thread 1 acquires a lock on the message loop and runs A.addChildOnly(B). Just after thread 1 releases the lock, thread 2 acquires the lock on the message loop and runs
+B.setParentOnly(A). Thread 3, servicing the tree, gets the message from thread 1 first and adds B as a child of A. Thread 3 then gets the message from thread 2 and 
+sets A as the parent of B.
+>!

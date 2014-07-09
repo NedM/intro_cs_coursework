@@ -1,0 +1,13 @@
+
+public class Calculator
+{
+	public static void About()
+	{
+		System.out.println("Ned's Calculator copyright 2012");
+	}
+	
+	public int Add(int a, int b)
+	{
+		return a + b;
+	}
+}

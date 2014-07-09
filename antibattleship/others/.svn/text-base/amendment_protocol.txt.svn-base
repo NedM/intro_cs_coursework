@@ -1,0 +1,101 @@
+# 6.005 Spring 2011
+# Project 2 Anti-Battleship
+# Amendment Protocol Definition
+
+A is the initiating player
+B is the receiving player
+
+=======================================
+= General Notes
+=======================================
+If either player ever receives a message it is not expecting, just
+ignore it.
+
+msg := syntax-error-msg | game-error-msg | init-game-msg
+    | game-accept-msg | game-deny-msg | board-hash-msg
+    | target-msg | results-msg
+    | victory-msg | accept-victory-msg | reject-victory-msg
+
+
+=======================================
+= Error Handling
+=======================================
+no change in error handling
+
+=======================================
+= Initialization Phase
+=======================================
+A sends game request to B
+
+ init-game-msg := "init-game" board-size ship-size-list ["salvo"]
+ board-size := number "x" number # rows x columns
+ ship-size-list := "[" (number ",")* number "]"
+
+ Example: "init-game 10x9 [1,1,2,3,5]"
+
+    This is a game on a board that is 10 squares high, 9 wide. It has
+    2 ships of length 1, 1 of length 2, 3 and 5. This is not the salvo variant.
+
+ Example: "init-game 5x5 [2,2,2,2,2] salvo"
+
+    This is a game on a board that is 5 squares high and 5 wide. It
+    has 5 ships of length 2. This is the salvo
+    variant.
+
+B sends accept request or deny request to A.
+
+ game-accept-msg := "accept-game"
+ game-deny-msg := "deny-game"
+
+If B has accepted the game, A must then send the SHA hash of the
+initial board position to B (see "Hashing").
+
+ board-hash-msg := "board-hash" board-hash
+ board-hash := ...
+
+B will then reply with the hash of its own board in the same format
+
+ board-hash-msg, etc
+
+=======================================
+= Game Phase
+=======================================
+
+A always moves first. The move will look like:
+
+ target-msg := "target" position+
+ position := "(" number "," number ")"
+
+    Regular Variant:
+ Example: target (4,5)
+    Salvo Variant:
+ Example: target (4,5) (1,3) (7,7)
+
+If the move was valid, then the other player (the one who did not make
+the move) must reply with the results:
+
+ results-msg := "results" outcome+
+ outcome := "water" | "fire" | "sunk"
+
+    Regular Variant:
+ Example: "results fire"
+    Salvo Variant:
+ Example: "results water fire fire sunk"
+
+Note that for each square, you can only have one outcome. So if a
+square is hit and no ship is sunk: you return 'fire'. If a square is
+hit and a ship is sunk, you only return 'sunk' for that square. If a
+square is miss, you return 'water' for that square.
+
+=======================================
+= Victory Phase
+=======================================
+
+no change in victory phase
+
+=======================================
+= Hashing
+=======================================
+
+
+no change in hashing

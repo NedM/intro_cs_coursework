@@ -1,0 +1,73 @@
+<project default="build">
+
+  <!-- ###################################################################### -->
+  <!--Sets up properties that will be used throughout the build script. -->
+  
+  <property name = "src" location ="src"/>
+  <property name = "dest" location = "bin"/>
+  <property name = "docdest" location = "api"/>
+  <property name="java.api" value="http://java.sun.com/j2se/1.5.0/docs/api" />
+  <property name="junit.api" value="http://www.junit.org/junit/javadoc/3.8.1" />
+  <property name="taglet.path" value="lib/javadoc6170.jar" />
+
+  <path id = "common.classpath">
+	<fileset	dir="lib">
+	  <include name="*.jar" />
+	</fileset>
+  </path> 
+
+  <!-- ###################################################################### -->
+  <!-- Removes auto-generated files. -->
+
+  <target name = "clean" description="Deletes most of the generated files">
+    <delete failonerror = "false">
+      <fileset dir = "bin"
+               includes="**/*.class">
+      </fileset>
+    </delete>
+  </target>
+
+  <!-- ###################################################################### -->
+  <!-- Compiles project -->
+
+  <target name = "build" depends="clean">
+    <mkdir dir="bin"/>
+    <javac srcdir="${src}" 
+           destdir="${dest}"
+           source="1.5"
+           debug="true"
+           fork="true">
+    	<classpath>
+    		<fileset dir="lib">
+    		  <include name="*.jar" />
+    		</fileset>
+    	</classpath>
+    </javac>
+  </target>
+  
+  <!-- ###################################################################### -->
+  <!-- Creates javadoc. -->
+    
+  <target name="doc" depends = "build" 
+          description = "Build all the Javadoc API documentation">
+    <mkdir dir = "${docdest}"/>
+    <javadoc destdir="${docdest}" linksource="yes">
+      <link href="${java.api}" />
+      <link href="${junit.api}" />
+      <fileset dir="${src}" defaultexcludes="yes" >
+      	<include name="**" />
+      </fileset>
+      
+      <taglet name="javadoc6170.RequiresTaglet" path="${taglet.path}" />
+      <taglet name="javadoc6170.EffectsTaglet" path="${taglet.path}" />
+      <taglet name="javadoc6170.ModifiesTaglet" path="${taglet.path}" />
+      <taglet name="javadoc6170.ReturnsTaglet" path="${taglet.path}" />
+      <taglet name="javadoc6170.SpecfieldTaglet" path="${taglet.path}" />
+      <taglet name="javadoc6170.DerivedfieldTaglet" path="${taglet.path}" />
+    </javadoc>
+  </target>
+
+</project>
+
+
+

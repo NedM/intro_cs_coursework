@@ -1,0 +1,227 @@
+# 6.005 Spring 2011
+# Project 2 Anti-Battleship
+# Protocol Definition
+
+A is the initiating player
+B is the receiving player
+
+=======================================
+= General Notes
+=======================================
+If either player ever receives a message it is not expecting, just
+ignore it.
+
+msg := syntax-error-msg | game-error-msg | init-game-msg
+    | game-accept-msg | game-deny-msg | board-hash-msg
+    | target-msg | results-msg
+    | victory-msg | accept-victory-msg | reject-victory-msg
+
+
+=======================================
+= Error Handling
+=======================================
+There are two types of errors, syntactic and game.
+
+A syntax error can be issued with the contents of the offending
+message appended to it. Syntax errors can either be the result of
+malformed messages or messages sent at the wrong time.
+
+ syntax-error-msg := "syntax-error" msg
+
+If the message was well-formed but semantically incorrect (board
+position that is out of bounds ...),
+then a semantic error can be issued. Like the syntax error, the
+offending message will be appended after the message.
+
+ game-error-msg := "game-error" msg
+
+Once an error message is sent the game is now over, and the player
+that caused the error loses. If you send an error message when the other
+player did nothing wrong this is a bug. You may lose correctness points,
+and you will not be able to compete in the tournament.
+
+=======================================
+= Initialization Phase
+=======================================
+A sends game request to B
+
+ init-game-msg := "init-game" board-size ship-size-list
+ board-size := number "x" number # rows x columns
+ ship-size-list := "[" (number ",")* number "]"
+
+The rows and columns in the board are 0-indexed.
+(0,0) represents the the top left square of the board.
+
+ Example: "init-game 10x9 [1,1,2,3,5]"
+
+    This is a game on a board that is 10 squares high, 9 wide. It has
+    2 ships of length 1, 1 of length 2, 3 and 5. 
+
+ Example: "init-game 5x5 [2,2,2,2,2]"
+
+    This is a game on a board that is 5 squares high and 5 wide. It
+    has 5 ships of length 2.
+
+B sends accept request or deny request to A.
+
+ game-accept-msg := "accept-game"
+ game-deny-msg := "deny-game"
+
+If B has accepted the game, A must then send the SHA hash of the
+initial board position to B (see "Hashing").
+
+ board-hash-msg := "board-hash" board-hash
+ board-hash := ...
+
+B will then reply with the hash of its own board in the same format
+
+ board-hash-msg, etc
+
+=======================================
+= Game Phase
+=======================================
+
+A always moves first. The move will look like:
+
+ target-msg := "target" position
+ position := "(" number "," number ")" # (row, column)
+
+ Again, the rows and columns in the board are 0-indexed.
+(0,0) represents the the top left square of the board.
+
+ Example: target (4,5)
+
+If the move was valid, then the other player (the one who did not make
+the move) must reply with the results:
+
+ results-msg := "results" outcome
+ outcome := "water" | "fire" | "sunk"
+
+ Example: "results fire"
+
+Note that for each square, you can only have one outcome. So if a
+square is hit and no ship is sunk: you return 'fire'. If a square is
+hit and a ship is sunk, you only return 'sunk' for that square. If a
+square is miss, you return 'water' for that square.
+
+=======================================
+= Victory Phase
+=======================================
+
+Either player can declare victory when all of their ships have been
+sunk by sending the victory message instead of the target message on
+that player's turn:
+
+ victory-msg := "victory" salt board-state
+ salt := number
+ board-state := "" | "0" board-state | "1" board-state
+
+To computer board state, iterate through each row from left to right
+starting in the top row. If there is a ship in that square add "1" to
+the string, otherwise add a "0".
+
+So suppose you had this 3 by 5 board where a 0 is an empty square and
+a x is a ship:
+
+000xx
+x0000
+x0000
+
+board-state would be: 000111000010000
+
+The other player can either agree with that victory, after checking
+the board state for cheating, or reject it
+
+ accept-victory-msg := "accept-victory"
+ reject-victory-msg := "reject-victory"
+
+=======================================
+= Hashing
+=======================================
+
+In this protocol, we wish for you to compute a "SHA" hash of the board
+position for security. As before, the board state of an m by n board
+can be represented as a string of 0's or 1's. In the example above,
+the board-state was "000111000010000".
+
+SHA has different variants (e.g. SHA-1, SHA-2). For this protocol, we
+provide code that uses a Message Digest and its default "SHA"
+implementation (see code that follows).
+
+To get the hash of a board position, we start with the string
+representing the board state, e.g. "000111000010000". We append "m"
+and then "n" and a salt that you choose (i.e. salt=10)  to the string, to get "0001110000100003510", and then
+convert this String to a byte array (i.e. byte[]) via
+String.getBytes(), and then use the byte[] as an input to a "SHA"
+Message digest. We convert the returned byte[] into a String that
+contains hexadecimal representation of the bytes in the digest.
+The salt is your extra protection against dictionary attack against your sent board hash.
+
+So, a board with "000111000010000", m=3, n=5 and salt=10 has the following hash:
+  "4960876e27116662b8f93a2dbf40b737e50ddf95".
+
+
+Also, a board with "011000110010110", m=5, n=3 and salt=10 has he following hash:
+"20fb73777e1523828b897264d212c21407192831".
+
+The code snippet for computing these SHA hashes follow.
+
+=======================================
+= HashExample code
+=======================================
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class HashExample {
+
+	private static String convertToHex(byte[] data) {
+
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < data.length; i++) {
+
+			int halfbyte = (data[i] >>> 4) & 0x0F;
+			int two_halfs = 0;
+
+			do {
+
+				if ((0 <= halfbyte) && (halfbyte <= 9))
+
+					buf.append((char) ('0' + halfbyte));
+
+				else
+
+					buf.append((char) ('a' + (halfbyte - 10)));
+
+				halfbyte = data[i] & 0x0F;
+
+			} while (two_halfs++ < 1);
+
+		}
+		return buf.toString();
+	}
+
+	public static String computeBoardHash(String boardRep, int rows, int columns, int salt)
+			throws NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("SHA");
+		String board = boardRep + rows + columns + salt;
+		byte[] bytes = board.getBytes();
+		md.update(bytes);
+		return convertToHex(md.digest());
+	}
+
+	public static void main(String[] args) {
+
+		String board = "000111000010000";
+		String board2 = "011000110010110";
+		try {
+			String hash = computeBoardHash(board, 3, 5, 10);
+			System.out.println(hash);
+			String hash2 = computeBoardHash(board2, 5, 3, 10);
+			System.out.println(hash2);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
+	}
+}

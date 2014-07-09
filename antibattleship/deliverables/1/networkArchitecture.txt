@@ -1,0 +1,16 @@
+Networking architecture and protocol:
+Our initial design for the network layer of our Anti-battleship program calls for two TCP/IP socket connections to the opponent. 
+One channel will be for transmitting and receiving game impacting messages. The other channel will be for exchanging chat messages. 
+These two channels will be represented by the classes ABSConnection.java and Chat.java respectively.
+Each class will be capable of starting as the server or client for the session. 
+Chat messages will be sent over the wire as plain text while game messages will be sent as objects according to an object contract. 
+Both chat messages and game messages that require output will be printed in the chat output window 
+(with different formatting so as to distinguish the two). 
+
+Security:
+We would like to build in some amount of network security into our game message channel in order to protect against cheaters/hackers. 
+We are considering the cost of implementing SSL through the JSSE API.
+
+Our design should offer some protection against denial of service attacks because we will listen to the opponent only 
+when we want a response and we will take only the first response we receive. The chat channel runs on a separate thread so a 
+denial of service attack against the chat thread should not affect the game thread.
